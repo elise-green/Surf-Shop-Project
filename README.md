@@ -2,7 +2,8 @@
 
 ## App description
 
-    A app that can be used at a surf rental shop to show the equipment that is currently available and the equipment 
+    
+A app that can be used at a surf rental shop to show the equipment that is currently available and the equipment 
 that is being rented out. It allows you to rent a piece of equipment out, return a piece of equipment, and buy a new 
 piece of equipment. It will also have the option to give the price for the amount of time rented, and the total profit  
 for the shop. This project is of interest to me as surfing is one of my hobbies and I think it would be interesting to 
