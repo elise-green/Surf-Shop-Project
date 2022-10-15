@@ -7,15 +7,15 @@ public class Wetsuit extends Equipment {
     private Sizes size;
 
 
-    private enum Type {
+    enum Type {
         MENS, WOMENS, KIDS
     }
 
-    private enum Sizes {
+    enum Sizes {
         XS, S, M, L, XL
     }
 
-    public Wetsuit(){
+    public Wetsuit(Type type, Sizes size) {
         this.type = type;
         this.size = size;
 

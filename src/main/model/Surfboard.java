@@ -2,11 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-public class Surfboard extends Equipment{
-private Sizes size;
+public abstract class Surfboard extends Equipment {
+    private int size;
 
-public Surfboard(){
-    this.size = size
+    public Surfboard(int size) {
+        this.size = size;
+    }
 }
 
-}

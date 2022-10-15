@@ -7,15 +7,13 @@ public class Booties extends Equipment {
     public enum Type {
         MENS, WOMENS, KIDS
     }
-    private enum Type {
-        MENS, WOMENS, KIDS
+
+
+    enum Sizes {
+        XS, S, M, L, XL
     }
 
-    private enum Sizes {
-        XS,S,M,L,XL
-    }
-
-    public Booties(){
+    public Booties(Type type, Sizes size) {
         this.type = type;
         this.size = size;
 

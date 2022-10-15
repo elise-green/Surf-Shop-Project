@@ -2,6 +2,7 @@ package model;
 
 
 public class Equipment {
+
     private static final int SURFBOARD_PRICE = 25;
     private static final int WETSUIT_PRICE = 20;
     private static final int  BOOTIE_PRICE = 10;
@@ -19,5 +20,7 @@ public class Equipment {
         return WETSUIT_PRICE;
     }
 
+    public Equipment(){
 
+    }
 }
