@@ -24,7 +24,7 @@ The different types of surfboards and for each type the length of the board, the
 - 8 ft
 - 7 ft
 
-**Epoxy lengths**:
+**Original lengths**:
 - 9 ft
 - 8 ft
 - 7 ft
@@ -85,6 +85,10 @@ The different categories of booties and for each type size, the price, and the s
 - As a user I want to choose a specific piece of equipment see if it is in stock.
 - As a user I want to be able to add a piece of equipment to the rented list.
 - As a user I want to be able to print a list of all the available surfboards.
+- As a user I want to be able to get the price of the gear selected for a specific time or an hourly rate.
+- As a user I want to be able to add a piece of equipment to the inventory.
+- 
+- 
 
 
 

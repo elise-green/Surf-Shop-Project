@@ -1,7 +1,12 @@
 package ui;
 
-public class Main {
+public class SurfShop extends {
+
+
     public static void main(String[] args) {
-        new SurfShop();
+
+
+
     }
+
 }
