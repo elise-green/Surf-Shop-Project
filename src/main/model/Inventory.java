@@ -31,17 +31,16 @@ public class Inventory {
     //MODIFIES: stock, this
     //EFFECTS: adds a piece of equipment to the stock
     public void addEquipment(Equipment equipment) {
-//stub;
-
     }
 
     //REQUIRES:
     //MODIFIES: rented or stock
     //EFFECTS:  removes a piece of equipment from rented or stock
     //addAll removeAll
-    public void removeEquipment(ArrayList<Equipment> items) {
+    public boolean removeEquipment(Equipment item) {
         //stub;
 
+        return false;
     }
 
     //EFFECTS: if the item is in stock it will return true and false if it is not.
@@ -53,7 +52,8 @@ public class Inventory {
     //REQUIRES:
     //MODIFIES: rented and stock
     //EFFECTS:  removes a piece of equipment from rented or stock
-    public void rentEquipment(ArrayList<Equipment> items) {
+    public boolean rentEquipment(ArrayList<Equipment> items) {
+        return false;
     }
 
     //EFFECTS: Gives the price of all the items and the time that
