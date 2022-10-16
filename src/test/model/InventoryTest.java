@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InventoryTest {
+public class InventoryTest {
    private Inventory myInventory;
    private Surfboard s1;
    private Surfboard s2;
@@ -96,7 +96,10 @@ public void testRentEquipment(){
 @Test
 
 public void getPrice(){
-
+list.add(s2);
+assertEquals(myInventory.getPrice(list, 5), Equipment.getWetsuitPrice()* 5);
+list.add(b1);
+assertEquals(myInventory.getPrice(list,2),(Equipment.getBootiePrice()+Equipment.getSurfboardPrice())*2 );
 }
 
 

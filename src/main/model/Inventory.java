@@ -31,6 +31,7 @@ public class Inventory {
     //MODIFIES: stock, this
     //EFFECTS: adds a piece of equipment to the stock
     public void addEquipment(Equipment equipment) {
+        stock.add(equipment);
     }
 
     //REQUIRES:
