@@ -21,7 +21,7 @@ public class InventoryTest {
 
 
      myInventory = new Inventory();
-     s1 = new SoftTop(10);
+     s1 = new SoftTop(8);
      s2 = new Original(6);
      w1 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M);
      w2 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.XL);
@@ -29,6 +29,16 @@ public class InventoryTest {
      b2 = new Booties(Booties.Type.MENS, Booties.Sizes.L);
      list = new ArrayList<Equipment>();
 }
+
+
+
+    @Test
+    public void testGetters(){
+        assertEquals(w1.getType(), Wetsuit.Type.WOMENS);
+        assertEquals(s1.getClass(), SoftTop.class);
+        assertEquals(b1.getSize(), Booties.Sizes.XS);
+
+    }
     @Test
 
     public void testAddEquipment(){
@@ -38,27 +48,28 @@ public class InventoryTest {
         assertEquals(myInventory.getStock().size(),2);
     }
     @Test
-public void testSetRented(){
+    public void testSetRented(){
         list.add(w1);
         list.add(w2);
         myInventory.setRented(list);
         assertEquals(myInventory.getRented().size(), 2);
 
-}
-@Test
-public void testSetStock(){
+    }
+    @Test
+    public void testSetStock(){
         assertEquals(myInventory.getStock().size(),0);
       list.add(b1);
       list.add(b2);
       list.add(w1);
       myInventory.setStock(list);
     assertEquals(myInventory.getStock().size(),3);
-}
-@Test
+    }
+    @Test
 
-public void testRemoveEquipment(){
-        myInventory.addEquipment(b1);
-        myInventory.addEquipment(b1);
+    public void testRemoveEquipment(){
+        list.add(b1);
+        list.add(b1);
+        myInventory.setStock(list);
         myInventory.removeEquipment(b1);
         assertEquals(myInventory.getStock().size(),1);
         assertTrue(myInventory.removeEquipment(b1));
@@ -68,8 +79,8 @@ public void testRemoveEquipment(){
         assertFalse(myInventory.removeEquipment(w1));
 
 }
-@Test
-public void testInStock(){
+    @Test
+    public void testInStock(){
         list.add(w1);
         list.add(w2);
         list.add(s1);
@@ -80,8 +91,8 @@ public void testInStock(){
         assertFalse(myInventory.inStock(b1));
         assertFalse(myInventory.inStock(b2));
 }
-@Test
-public void testRentEquipment(){
+    @Test
+    public void testRentEquipment(){
     list.add(w1);
     list.add(w2);
     list.add(s1);
@@ -92,18 +103,18 @@ public void testRentEquipment(){
     assertEquals(myInventory.getStock().size(),0);
     assertEquals(myInventory.getRented().size(), list.size());
 
-}
-@Test
+    }
+    @Test
 
-public void getPrice(){
-list.add(s2);
-assertEquals(myInventory.getPrice(list, 5), Equipment.getWetsuitPrice()* 5);
-list.add(b1);
-assertEquals(myInventory.getPrice(list,2),(Equipment.getBootiePrice()+Equipment.getSurfboardPrice())*2 );
-}
-
-
+    public void getPrice(){
+    list.add(s2);
+    assertEquals(myInventory.getPrice(list, 5), Equipment.getWetsuitPrice() * 5);
+    list.add(b1);
+    assertEquals(myInventory.getPrice(list,2),(Equipment.getBootiePrice()+Equipment.getSurfboardPrice())*2 );
+    }
 
 
 
-}
+
+
+    }

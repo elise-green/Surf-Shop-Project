@@ -2,7 +2,11 @@ package model;
 
 public class SoftTop extends Surfboard {
     private int size;
-    private static int[] SIZES = {10, 9, 8, 7};
+    public static final int[] SIZES;
+
+    static {
+        SIZES = new int[]{10, 9, 8, 7};
+    }
 
     public SoftTop(int size) {
 
@@ -10,4 +14,5 @@ public class SoftTop extends Surfboard {
     }
 
 }
+
 

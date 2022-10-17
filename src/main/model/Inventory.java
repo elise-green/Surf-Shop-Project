@@ -2,14 +2,17 @@ package model;
 
 import java.util.ArrayList;
 
+//
+//MODIFIES : Equipment
+//EFFECTS: a class to make all the things helps to change the lists of equipment. It stores stock and rented.
+//
 public class Inventory {
     private ArrayList<Equipment> stock;
     private ArrayList<Equipment> rented;
 
 
     public Inventory() {
-        ArrayList<Equipment> stock = new ArrayList<Equipment>();
-        ArrayList<Equipment> rented = new ArrayList<Equipment>();
+
     }
 
     public ArrayList<Equipment> getStock() {
@@ -30,8 +33,8 @@ public class Inventory {
 
     //MODIFIES: stock, this
     //EFFECTS: adds a piece of equipment to the stock
-    public void addEquipment(Equipment equipment) {
-        stock.add(equipment);
+    public void addEquipment(Equipment thing) {
+        stock.add(thing);
     }
 
     //REQUIRES:
@@ -39,27 +42,56 @@ public class Inventory {
     //EFFECTS:  removes a piece of equipment from rented or stock
     //addAll removeAll
     public boolean removeEquipment(Equipment item) {
-        //stub;
-
-        return false;
+        if (stock.contains(item)) {
+            stock.remove(item);
+            return true;
+        } else return false;
     }
 
     //EFFECTS: if the item is in stock it will return true and false if it is not.
     public boolean inStock(Equipment piece) {
-        //stub;
-        return false;
+        return stock.contains(piece);
     }
 
     //REQUIRES:
     //MODIFIES: rented and stock
     //EFFECTS:  removes a piece of equipment from rented or stock
     public boolean rentEquipment(ArrayList<Equipment> items) {
+        if (stock.containsAll(items)) {
+            stock.removeAll(items);
+            rented.addAll(items);
+            return true;
+        }
         return false;
     }
 
+    public String className(Equipment e) {
+        if (e.getClass() == SoftTop.class) {
+            return "SurfBoard";
+        } else if (e.getClass() == Original.class) {
+            return "SurfBoard";
+        } else if (e.getClass() == Wetsuit.class) {
+            return "Wetsuit";
+        }
+        return "Booties";
+
+
+    }
     //EFFECTS: Gives the price of all the items and the time that
     public int getPrice(ArrayList<Equipment> items, int time) {
-        return 0;
+        int n = 0;
+        for (int i = 0; i < items.size(); i++) {
+            if(className(items.get(i)) == "Surfboard" ){
+                n = n + Equipment.getSurfboardPrice() * time ;
+            } else if (className(items.get(i)) == "Wetsuit") {
+                n = n + Equipment.getWetsuitPrice() * time;
+            } else if (className(items.get(i)) == "Booties") {
+                n = n + Equipment.getBootiePrice() * time;
+
+            }
+
+        }
+        return n;
     }
 
 
