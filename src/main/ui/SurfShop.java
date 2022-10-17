@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 // Surf Shop application
-public class SurfShop extends Inventory{
+public class SurfShop extends Inventory {
     private Inventory myShop;
     private Scanner input;
 
@@ -107,7 +107,7 @@ public class SurfShop extends Inventory{
             myShop.addEquipment(new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M));
             System.out.println("Added a women's wetsuit...\n");
         } else {
-           myShop.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.M));
+            myShop.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.M));
             System.out.println("Added a kids wetsuit...\n");
         }
 
@@ -126,7 +126,7 @@ public class SurfShop extends Inventory{
             myShop.addEquipment(new Booties(Booties.Type.WOMENS, Booties.Sizes.M));
             System.out.println("Added women's booties...\n");
         } else {
-            myShop.addEquipment( new Booties(Booties.Type.KIDS, Booties.Sizes.M));
+            myShop.addEquipment(new Booties(Booties.Type.KIDS, Booties.Sizes.M));
             System.out.println("Added kids booties ...\n");
         }
 
@@ -152,6 +152,7 @@ public class SurfShop extends Inventory{
             return "original";
         }
     }
+
     private String select() {
         String selection = "";  // force entry into loop
 
