@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class Wetsuit extends Equipment {
-    public Type type;
-    public Sizes size;
+    private Wetsuit.Type type;
+    private Wetsuit.Sizes size;
 
 
     public enum Type {

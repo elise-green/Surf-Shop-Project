@@ -110,7 +110,7 @@ public class InventoryTest {
     list.add(s2);
     assertEquals(myInventory.getPrice(list, 5), Equipment.getWetsuitPrice() * 5);
     list.add(b1);
-    assertEquals(myInventory.getPrice(list,2),(Equipment.getBootiePrice()+Equipment.getSurfboardPrice())*2 );
+    assertEquals(myInventory.getPrice(list,2),(Equipment.getBootiePrice()+Equipment.getSurfboardPrice())*2);
     }
 
 

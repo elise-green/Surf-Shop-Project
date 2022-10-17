@@ -45,7 +45,9 @@ public class Inventory {
         if (stock.contains(item)) {
             stock.remove(item);
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     //EFFECTS: if the item is in stock it will return true and false if it is not.
@@ -77,12 +79,13 @@ public class Inventory {
 
 
     }
+
     //EFFECTS: Gives the price of all the items and the time that
     public int getPrice(ArrayList<Equipment> items, int time) {
         int n = 0;
         for (int i = 0; i < items.size(); i++) {
-            if(className(items.get(i)) == "Surfboard" ){
-                n = n + Equipment.getSurfboardPrice() * time ;
+            if (className(items.get(i)) == "Surfboard") {
+                n = n + Equipment.getSurfboardPrice() * time;
             } else if (className(items.get(i)) == "Wetsuit") {
                 n = n + Equipment.getWetsuitPrice() * time;
             } else if (className(items.get(i)) == "Booties") {
