@@ -2,8 +2,7 @@
 package ui;
 
 
-import model.Equipment;
-import model.Inventory;
+import model.*;
 
 import java.util.Scanner;
 
@@ -44,12 +43,12 @@ public class SurfShop {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("d")) {
-            doDeposit();
+        if (command.equals("s")) {
+            addSurfboard();
         } else if (command.equals("w")) {
-            doWithdrawal();
-        } else if (command.equals("t")) {
-            doTransfer();
+            addWetsuit;
+        } else if (command.equals("b")) {
+            addBooties;
         } else {
             System.out.println("Selection not valid...");
         }
@@ -66,32 +65,36 @@ public class SurfShop {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
-        System.out.println("\td -> add stock");
-        System.out.println("\tw -> get stock");
-        System.out.println("\tt -> rent equipment");
+        System.out.println("\ts -> add surfboard");
+        System.out.println("\tw -> add wetsuit");
+        System.out.println("\tb -> add booties");
         System.out.println("\tq -> quit");
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts a deposit transaction
-    private void addStock(Equipment piece ) {
-        myShop.addEquipment(piece);
-        System.out.print("Enter amount to deposit: $");
-        double amount = input.nextDouble();
+    // EFFECTS: allows the user to add a surfboard
+    private void addSurfboard() {
+        System.out.print("Enter type ");
+        String type = selectType();
+        System.out.print("Enter length");
+        int length = input.nextInt();
 
-        if (amount >= 0.0) {
-            selected.deposit(amount);
+
+
+        if (type.equals("Softtop")) {
+            SoftTop x = new SoftTop(length);
+            myShop.addEquipment(x);
+
         } else {
-            System.out.println("Cannot deposit negative amount...\n");
+            Original y = new Original(length);
+            myShop.addEquipment(y);
         }
-
-        printBalance(selected);
+        System.out.println("new surfboard was added");
     }
 
     // MODIFIES: this
     // EFFECTS: conducts a withdraw transaction
-    private void doWithdrawal() {
-        Account selected = selectAccount();
+    private void addWetsuit() {
         System.out.print("Enter amount to withdraw: $");
         double amount = input.nextDouble();
 
@@ -133,25 +136,43 @@ public class SurfShop {
     }
 
     // EFFECTS: prompts user to select chequing or savings account and returns it
-    private Account selectAccount() {
+    private String selectType() {
         String selection = "";  // force entry into loop
 
-        while (!(selection.equals("c") || selection.equals("s"))) {
-            System.out.println("c for chequing");
-            System.out.println("s for savings");
+        while (!(selection.equals("s") || selection.equals("o"))) {
+            System.out.println("o for original");
+            System.out.println("s for softtop");
             selection = input.next();
             selection = selection.toLowerCase();
         }
 
-        if (selection.equals("c")) {
-            return cheq;
+        if (selection.equals("s")) {
+            return "softtop";
         } else {
-            return sav;
+            return "original";
+        }
+    }
+
+    private String selectRange() {
+        String selection = "";  // force entry into loop
+
+        while (!(selection.equals("m") || selection.equals("w") || selection.equals("k"))) {
+            System.out.println("m for mens");
+            System.out.println("w for women's");
+            System.out.println("k for kids");
+            selection = input.next();
+            selection = selection.toLowerCase();
+        }
+
+        if (selection.equals("m")) {
+            return Wetsuit(Wetsuit.M);
+        } else {
+            return "original";
         }
     }
 
     // EFFECTS: prints balance of account to the screen
-    private void printBalance(Account selected) {
-        System.out.printf("Balance: $%.2f\n", selected.getBalance());
+    private void printBalance(Inventory selected) {
+        System.out.printf("Stock: $%.2f\n", selected.getStock());
     }
 }
