@@ -9,7 +9,7 @@ public class Booties extends Equipment {
     }
 
 
-    enum Sizes {
+    public enum Sizes {
         XS, S, M, L, XL
     }
 

@@ -3,15 +3,15 @@ package model;
 import java.util.ArrayList;
 
 public class Wetsuit extends Equipment {
-    private Type type;
-    private Sizes size;
+    public Type type;
+    public Sizes size;
 
 
-    enum Type {
+    public enum Type {
         MENS, WOMENS, KIDS
     }
 
-    enum Sizes {
+    public enum Sizes {
         XS, S, M, L, XL
     }
 

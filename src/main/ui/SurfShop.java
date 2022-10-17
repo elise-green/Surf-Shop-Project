@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 // Surf Shop application
-public class SurfShop {
+public class SurfShop extends Inventory{
     private Inventory myShop;
     private Scanner input;
 
@@ -46,16 +46,16 @@ public class SurfShop {
         if (command.equals("s")) {
             addSurfboard();
         } else if (command.equals("w")) {
-            addWetsuit;
+            addWetsuit();
         } else if (command.equals("b")) {
-            addBooties;
+            addBooties();
         } else {
             System.out.println("Selection not valid...");
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes accounts
+    // EFFECTS: initializes inventory
     private void init() {
         myShop = new Inventory();
         input = new Scanner(System.in);
@@ -80,7 +80,6 @@ public class SurfShop {
         int length = input.nextInt();
 
 
-
         if (type.equals("Softtop")) {
             SoftTop x = new SoftTop(length);
             myShop.addEquipment(x);
@@ -93,47 +92,48 @@ public class SurfShop {
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts a withdraw transaction
+    // EFFECTS: adds a wetsuit to the stock
     private void addWetsuit() {
-        System.out.print("Enter amount to withdraw: $");
-        double amount = input.nextDouble();
+        System.out.print("Select type");
+        String category = selectRange();
+        System.out.print("Select size ");
+        String size = input.next();
 
-        if (amount < 0.0) {
-            System.out.println("Cannot withdraw negative amount...\n");
-        } else if (selected.getBalance() < amount) {
-            System.out.println("Insufficient balance on account...\n");
+
+        if (category.equals("MENS")) {
+            myShop.addEquipment(new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.M));
+            System.out.println("Added a mens wetsuit...\n");
+        } else if (category.equals("WOMENS")) {
+            myShop.addEquipment(new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M));
+            System.out.println("Added a women's wetsuit...\n");
         } else {
-            selected.withdraw(amount);
+           myShop.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.M));
+            System.out.println("Added a kids wetsuit...\n");
         }
 
-        printBalance(selected);
     }
 
-    // MODIFIES: this
-    // EFFECTS: conducts a transfer transaction
-    private void doTransfer() {
-        System.out.println("\nTransfer from?");
-        Account source = selectAccount();
-        System.out.println("Transfer to?");
-        Account destination = selectAccount();
+    private void addBooties() {
+        System.out.print("Select type");
+        String category = selectRange();
+        System.out.print("Select size: XS, S, M, L, XL");
 
-        System.out.print("Enter amount to transfer: $");
-        double amount = input.nextDouble();
 
-        if (amount < 0.0) {
-            System.out.println("Cannot transfer negative amount...\n");
-        } else if (source.getBalance() < amount) {
-            System.out.println("Insufficient balance on source account...\n");
+        if (category.equals("MENS")) {
+            myShop.addEquipment(new Booties(Booties.Type.MENS, Booties.Sizes.M));
+            System.out.println("Added mens booties...\n");
+        } else if (category.equals("WOMENS")) {
+            myShop.addEquipment(new Booties(Booties.Type.WOMENS, Booties.Sizes.M));
+            System.out.println("Added women's booties...\n");
         } else {
-            source.withdraw(amount);
-            destination.deposit(amount);
+            myShop.addEquipment( new Booties(Booties.Type.KIDS, Booties.Sizes.M));
+            System.out.println("Added kids booties ...\n");
         }
 
-        System.out.print("Source ");
-        printBalance(source);
-        System.out.print("Destination ");
-        printBalance(destination);
     }
+
+
+
 
     // EFFECTS: prompts user to select chequing or savings account and returns it
     private String selectType() {
@@ -152,6 +152,23 @@ public class SurfShop {
             return "original";
         }
     }
+    private String select() {
+        String selection = "";  // force entry into loop
+
+        while (!(selection.equals("s") || selection.equals("o"))) {
+            System.out.println("o for original");
+            System.out.println("s for softtop");
+            selection = input.next();
+            selection = selection.toLowerCase();
+        }
+
+        if (selection.equals("s")) {
+            return "softtop";
+        } else {
+            return "original";
+        }
+    }
+
 
     private String selectRange() {
         String selection = "";  // force entry into loop
@@ -165,14 +182,16 @@ public class SurfShop {
         }
 
         if (selection.equals("m")) {
-            return Wetsuit(Wetsuit.M);
+            return "MENS";
+        } else if (selection.equals("w")) {
+            return "WOMENS";
         } else {
-            return "original";
+            return "KIDS";
         }
     }
 
     // EFFECTS: prints balance of account to the screen
-    private void printBalance(Inventory selected) {
-        System.out.printf("Stock: $%.2f\n", selected.getStock());
+    private void printBalance() {
+        System.out.printf("Stock: $%.2f\n", myShop.getStock());
     }
 }

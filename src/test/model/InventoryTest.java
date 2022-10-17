@@ -42,9 +42,9 @@ public class InventoryTest {
     @Test
 
     public void testAddEquipment(){
-        myInventory.addEquipment(s1);
+        myInventory.addEquipment(b1);
         assertEquals(myInventory.getStock().size(),1);
-        myInventory.addEquipment(s1);
+        myInventory.addEquipment(b1);
         assertEquals(myInventory.getStock().size(),2);
     }
     @Test
