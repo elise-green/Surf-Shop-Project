@@ -104,16 +104,30 @@ public class InventoryTest {
     assertEquals(myInventory.getRented().size(), list.size());
 
     }
+
     @Test
 
-    public void getPrice(){
-    list.add(s2);
-    assertEquals(myInventory.getPrice(list, 5), Equipment.getWetsuitPrice() * 5);
-    list.add(b1);
-    assertEquals(myInventory.getPrice(list,2),(Equipment.getBootiePrice()+Equipment.getSurfboardPrice())*2);
+    public void testClassName(){
+        assertEquals(myInventory.className(b1), "Booties");
+        assertEquals(myInventory.className(s1), "Surfboard");
+        assertEquals(myInventory.className(s2), "Surfboard");
+        assertEquals(myInventory.className(w1), "Wetsuit");
     }
 
 
+
+    @Test
+
+    public void testGetPrice(){
+        assertEquals(myInventory.getPrice(list, 5), 0);
+    list.add(s2);
+    assertEquals(myInventory.getPrice(list, 5), Equipment.getSurfboardPrice() * 5);
+    list.add(b1);
+    assertEquals(myInventory.getPrice(list,2),
+            (Equipment.getBootiePrice() + Equipment.getSurfboardPrice()) * 2 );
+
+
+    }
 
 
 

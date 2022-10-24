@@ -12,6 +12,8 @@ public class Inventory {
 
 
     public Inventory() {
+        stock = new ArrayList<Equipment>();
+        rented = new ArrayList<Equipment>();
 
     }
 
@@ -69,27 +71,26 @@ public class Inventory {
 
     public String className(Equipment e) {
         if (e.getClass() == SoftTop.class) {
-            return "SurfBoard";
+            return "Surfboard";
         } else if (e.getClass() == Original.class) {
-            return "SurfBoard";
+            return "Surfboard";
         } else if (e.getClass() == Wetsuit.class) {
             return "Wetsuit";
         }
         return "Booties";
-
-
     }
+
 
     //EFFECTS: Gives the price of all the items and the time that
     public int getPrice(ArrayList<Equipment> items, int time) {
         int n = 0;
         for (int i = 0; i < items.size(); i++) {
             if (className(items.get(i)) == "Surfboard") {
-                n = n + Equipment.getSurfboardPrice() * time;
+                n += (Equipment.getSurfboardPrice() * time);
             } else if (className(items.get(i)) == "Wetsuit") {
-                n = n + Equipment.getWetsuitPrice() * time;
+                n += (Equipment.getWetsuitPrice() * time);
             } else if (className(items.get(i)) == "Booties") {
-                n = n + Equipment.getBootiePrice() * time;
+                n += (Equipment.getBootiePrice() * time);
 
             }
 

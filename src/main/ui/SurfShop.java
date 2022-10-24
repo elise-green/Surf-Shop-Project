@@ -49,10 +49,19 @@ public class SurfShop extends Inventory {
             addWetsuit();
         } else if (command.equals("b")) {
             addBooties();
+        } else if (command.equals("g")) {
+            getStock();
+        } else if (command.equals("r")) {
+            getRented();
+        } else if (command.equals("e")) {
+            wantToRent();
+
         } else {
             System.out.println("Selection not valid...");
         }
     }
+
+
 
     // MODIFIES: this
     // EFFECTS: initializes inventory
@@ -68,7 +77,11 @@ public class SurfShop extends Inventory {
         System.out.println("\ts -> add surfboard");
         System.out.println("\tw -> add wetsuit");
         System.out.println("\tb -> add booties");
+        System.out.println("\tg -> get stock");
+        System.out.println("\tr -> get rented");
+        System.out.println("\te -> rent equipment");
         System.out.println("\tq -> quit");
+
     }
 
     // MODIFIES: this
@@ -130,6 +143,9 @@ public class SurfShop extends Inventory {
             System.out.println("Added kids booties ...\n");
         }
 
+    }
+
+    private void wantToRent() {
     }
 
 
