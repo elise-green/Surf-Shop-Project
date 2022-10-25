@@ -4,6 +4,7 @@ package ui;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -54,10 +55,10 @@ public class SurfShop extends Inventory {
                 addBooties();
                 break;
             case "g":
-                myShop.getStock();
+                showStock();
                 break;
             case "r":
-                myShop.getRented();
+                showRented();
                 break;
             case "e":
                 wantToRent();
@@ -67,6 +68,20 @@ public class SurfShop extends Inventory {
                 System.out.println("Selection not valid...");
                 break;
         }
+    }
+
+    private void showRented() {
+       ArrayList<Equipment> x = myShop.getRented();
+        for (int i = 0; i < x.size(); i++) {
+           if(x.get(i).getClass().equals(SoftTop)){
+               System.out.println();
+           }
+        }
+
+    }
+
+    private void showStock() {
+
     }
 
 

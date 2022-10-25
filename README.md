@@ -82,13 +82,12 @@ The different categories of booties and for each type size, the price, and the s
 
 ## User Stories:
 - As a user I want to be able to see the list of rented out equipment.
-- As a user I want to choose a specific piece of equipment see if it is in stock.
 - As a user I want to be able to add a piece of equipment to the rented list.
-- As a user I want to be able to print a list of all the available surfboards.
-- As a user I want to be able to get the price of the gear selected for a specific time or an hourly rate.
+- As a user I want to be able to print a list of all the available equipment.
+- As a user I want to be able to get the price of the gear selected for a specific time.
 - As a user I want to be able to add a piece of equipment to the inventory.
-- 
-- 
+- As a user I want to be able to save the stock and rented equipment to the file.
+- As a user I want to be able to be able to reload stock amd rented and resume where I was.
 
 
 
