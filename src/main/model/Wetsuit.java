@@ -28,4 +28,10 @@ public class Wetsuit extends Equipment {
     public Type getType() {
         return type;
     }
+
+    @Override
+
+    public String toString() {
+        return "Wetsuit(Category =" + getType() + ", Size=" + getSize() + ")";
+    }
 }

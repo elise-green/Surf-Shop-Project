@@ -27,4 +27,10 @@ public class Booties extends Equipment {
         return type;
     }
 
+    @Override
+
+    public String toString() {
+        return "Booties(Category =" + getType() + ", Size=" + getSize() + ")";
+    }
+
 }

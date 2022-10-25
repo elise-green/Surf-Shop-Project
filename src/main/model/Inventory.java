@@ -93,7 +93,6 @@ public class Inventory {
                 n += (Equipment.getBootiePrice() * time);
 
             }
-
         }
         return n;
     }

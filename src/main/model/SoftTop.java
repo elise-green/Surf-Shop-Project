@@ -13,6 +13,13 @@ public class SoftTop extends Surfboard {
         super(size);
     }
 
+    @Override
+
+    public String toString() {
+        return "Soft top Surfboard(length=" + size + ")";
+    }
 }
+
+
 
 

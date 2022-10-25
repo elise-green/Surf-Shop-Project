@@ -11,4 +11,10 @@ public class Original extends Surfboard {
     public Original(int size) {
         super(size);
     }
+
+    @Override
+
+    public String toString() {
+        return "Original Surfboard(length=" + size + ")";
+    }
 }

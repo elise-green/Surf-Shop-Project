@@ -43,6 +43,7 @@ public class SurfShop extends Inventory {
 
     // MODIFIES: this
     // EFFECTS: processes user command
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void processCommand(String command) {
         switch (command) {
             case "s":
@@ -55,14 +56,19 @@ public class SurfShop extends Inventory {
                 addBooties();
                 break;
             case "g":
-                showStock();
+                System.out.println(myShop.getStock());
                 break;
             case "r":
-                showRented();
+                System.out.println(myShop.getRented());
                 break;
-            case "e":
-                wantToRent();
-
+            case "rs":
+                rentSurfboard();
+                break;
+            case "rw":
+                rentWetsuit();
+                break;
+            case "rb":
+                rentBooties();
                 break;
             default:
                 System.out.println("Selection not valid...");
@@ -70,20 +76,74 @@ public class SurfShop extends Inventory {
         }
     }
 
-    private void showRented() {
-       ArrayList<Equipment> x = myShop.getRented();
-        for (int i = 0; i < x.size(); i++) {
-           if(x.get(i).getClass().equals(SoftTop)){
-               System.out.println();
-           }
+    private void rentBooties() {
+        System.out.print("Select type");
+        String category = selectRange();
+        System.out.print("Select size");
+        Booties.Sizes size = selectBootieSize();
+        ArrayList<Equipment> list = new ArrayList<>();
+
+
+        if (category.equals("MENS")) {
+            list.add(new Booties(Booties.Type.MENS, size));
+            myShop.rentEquipment(list);
+            System.out.println("Rented mens booties...\n");
+        } else if (category.equals("WOMENS")) {
+            list.add(new Booties(Booties.Type.WOMENS, size));
+            myShop.rentEquipment(list);
+            System.out.println("Rented women's booties...\n");
+        } else {
+            list.add(new Booties(Booties.Type.KIDS, size));
+            myShop.rentEquipment(list);
+            System.out.println("Rented kids booties ...\n");
         }
-
     }
 
-    private void showStock() {
+    private void rentWetsuit() {
+        System.out.print("Select type");
+        String category = selectRange();
 
+        System.out.print("Select size ");
+        Wetsuit.Sizes size = selectWetsuitSize();
+
+        ArrayList<Equipment> list = new ArrayList<>();
+
+        if (category.equals("MENS")) {
+            list.add(new Wetsuit(Wetsuit.Type.MENS, size));
+            myShop.rentEquipment(list);
+            System.out.println("Rented a mens wetsuit...\n");
+        } else if (category.equals("WOMENS")) {
+            list.add(new Wetsuit(Wetsuit.Type.WOMENS, size));
+            myShop.rentEquipment(list);
+            System.out.println("Rented a women's wetsuit...\n");
+        } else {
+            list.add(new Wetsuit(Wetsuit.Type.KIDS, size));
+            myShop.rentEquipment(list);
+            System.out.println("Rented a kids wetsuit...\n");
+        }
     }
 
+    private void rentSurfboard() {
+        System.out.print("Enter type ");
+        String type = selectType();
+        System.out.print("Enter length");
+        int length = input.nextInt();
+        System.out.println("Enter action");
+
+        ArrayList<Equipment> list = new ArrayList<>();
+
+
+        if (type.equals("Softtop")) {
+            SoftTop x = new SoftTop(length);
+            list.add(x);
+            myShop.rentEquipment(list);
+        } else {
+            Original y = new Original(length);
+            list.add(y);
+            myShop.rentEquipment(list);
+        }
+        System.out.println("surfboard was rented");
+    }
 
     // MODIFIES: this
     // EFFECTS: initializes inventory
@@ -100,8 +160,10 @@ public class SurfShop extends Inventory {
         System.out.println("\tw -> add wetsuit");
         System.out.println("\tb -> add booties");
         System.out.println("\tg -> get stock");
+        System.out.println("\trs -> rent surfboard");
+        System.out.println("\trw -> rent wetsuit");
+        System.out.println("\trb -> rent booties");
         System.out.println("\tr -> get rented");
-        System.out.println("\te -> rent equipment");
         System.out.println("\tq -> quit");
 
     }
@@ -113,6 +175,7 @@ public class SurfShop extends Inventory {
         String type = selectType();
         System.out.print("Enter length");
         int length = input.nextInt();
+        System.out.println("Enter action");
 
 
         if (type.equals("Softtop")) {
@@ -169,9 +232,6 @@ public class SurfShop extends Inventory {
 
     }
 
-    private void wantToRent() {
-    }
-
 
     // EFFECTS: prompts user to select chequing or savings account and returns it
     private String selectType() {
@@ -190,7 +250,6 @@ public class SurfShop extends Inventory {
             return "original";
         }
     }
-
 
 
     private String selectRange() {

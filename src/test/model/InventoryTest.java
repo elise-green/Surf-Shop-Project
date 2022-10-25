@@ -102,7 +102,7 @@ public class InventoryTest {
     myInventory.rentEquipment(list);
     assertEquals(myInventory.getStock().size(),0);
     assertEquals(myInventory.getRented().size(), list.size());
-
+    assertEquals(myInventory.getRented().size(), list.size());
     }
 
     @Test
