@@ -43,24 +43,31 @@ public class SurfShop extends Inventory {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("s")) {
-            addSurfboard();
-        } else if (command.equals("w")) {
-            addWetsuit();
-        } else if (command.equals("b")) {
-            addBooties();
-        } else if (command.equals("g")) {
-            getStock();
-        } else if (command.equals("r")) {
-            getRented();
-        } else if (command.equals("e")) {
-            wantToRent();
+        switch (command) {
+            case "s":
+                addSurfboard();
+                break;
+            case "w":
+                addWetsuit();
+                break;
+            case "b":
+                addBooties();
+                break;
+            case "g":
+                getStock();
+                break;
+            case "r":
+                getRented();
+                break;
+            case "e":
+                wantToRent();
 
-        } else {
-            System.out.println("Selection not valid...");
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
         }
     }
-
 
 
     // MODIFIES: this
@@ -109,18 +116,19 @@ public class SurfShop extends Inventory {
     private void addWetsuit() {
         System.out.print("Select type");
         String category = selectRange();
+
         System.out.print("Select size ");
-        String size = input.next();
+        Wetsuit.Sizes size = selectWetsuitSize();
 
 
         if (category.equals("MENS")) {
-            myShop.addEquipment(new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.M));
+            myShop.addEquipment(new Wetsuit(Wetsuit.Type.MENS, size));
             System.out.println("Added a mens wetsuit...\n");
         } else if (category.equals("WOMENS")) {
-            myShop.addEquipment(new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M));
+            myShop.addEquipment(new Wetsuit(Wetsuit.Type.WOMENS, size));
             System.out.println("Added a women's wetsuit...\n");
         } else {
-            myShop.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.M));
+            myShop.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, size));
             System.out.println("Added a kids wetsuit...\n");
         }
 
@@ -129,17 +137,18 @@ public class SurfShop extends Inventory {
     private void addBooties() {
         System.out.print("Select type");
         String category = selectRange();
-        System.out.print("Select size: XS, S, M, L, XL");
+        System.out.print("Select size");
+        Booties.Sizes size = selectBootieSize();
 
 
         if (category.equals("MENS")) {
-            myShop.addEquipment(new Booties(Booties.Type.MENS, Booties.Sizes.M));
+            myShop.addEquipment(new Booties(Booties.Type.MENS, size));
             System.out.println("Added mens booties...\n");
         } else if (category.equals("WOMENS")) {
-            myShop.addEquipment(new Booties(Booties.Type.WOMENS, Booties.Sizes.M));
+            myShop.addEquipment(new Booties(Booties.Type.WOMENS, size));
             System.out.println("Added women's booties...\n");
         } else {
-            myShop.addEquipment(new Booties(Booties.Type.KIDS, Booties.Sizes.M));
+            myShop.addEquipment(new Booties(Booties.Type.KIDS, size));
             System.out.println("Added kids booties ...\n");
         }
 
@@ -147,8 +156,6 @@ public class SurfShop extends Inventory {
 
     private void wantToRent() {
     }
-
-
 
 
     // EFFECTS: prompts user to select chequing or savings account and returns it
@@ -169,22 +176,6 @@ public class SurfShop extends Inventory {
         }
     }
 
-    private String select() {
-        String selection = "";  // force entry into loop
-
-        while (!(selection.equals("s") || selection.equals("o"))) {
-            System.out.println("o for original");
-            System.out.println("s for softtop");
-            selection = input.next();
-            selection = selection.toLowerCase();
-        }
-
-        if (selection.equals("s")) {
-            return "softtop";
-        } else {
-            return "original";
-        }
-    }
 
 
     private String selectRange() {
@@ -207,8 +198,65 @@ public class SurfShop extends Inventory {
         }
     }
 
-    // EFFECTS: prints balance of account to the screen
-    private void printBalance() {
-        System.out.printf("Stock: $%.2f\n", myShop.getStock());
+    @SuppressWarnings({"methodLength", "checkstyle:SuppressWarnings"})
+    private Wetsuit.Sizes selectWetsuitSize() {
+        String selection = "";  // force entry into loop
+
+        while (!(selection.equals("xs") || selection.equals("s") || selection.equals("m") || selection.equals("l")
+                || selection.equals("xl"))) {
+            System.out.println("xs for extra-small");
+            System.out.println("s for small");
+            System.out.println("m for medium");
+            System.out.println("l for large");
+            System.out.println("xl for extra-large");
+            selection = input.next();
+            selection = selection.toLowerCase();
+        }
+        switch (selection) {
+
+            case "xs":
+                return Wetsuit.Sizes.XS;
+            case "s":
+                return Wetsuit.Sizes.S;
+            case "m":
+                return Wetsuit.Sizes.M;
+            case "l":
+                return Wetsuit.Sizes.L;
+            case "xl":
+                return Wetsuit.Sizes.XL;
+            default:
+                return selectWetsuitSize();
+        }
+    }
+
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    private Booties.Sizes selectBootieSize() {
+        String selection = "";  // force entry into loop
+
+        while (!(selection.equals("xs") || selection.equals("s") || selection.equals("m") || selection.equals("l")
+                || selection.equals("xl"))) {
+            System.out.println("xs for extra-small");
+            System.out.println("s for small");
+            System.out.println("m for medium");
+            System.out.println("l for large");
+            System.out.println("xl for extra-large");
+            selection = input.next();
+            selection = selection.toLowerCase();
+        }
+
+        switch (selection) {
+            case "xs":
+                return Booties.Sizes.XS;
+            case "s":
+                return Booties.Sizes.S;
+            case "m":
+                return Booties.Sizes.M;
+            case "l":
+                return Booties.Sizes.L;
+            case "xl":
+                return Booties.Sizes.XL;
+            default:
+                return selectBootieSize();
+        }
     }
 }
