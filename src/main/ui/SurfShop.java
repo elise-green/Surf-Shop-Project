@@ -54,10 +54,10 @@ public class SurfShop extends Inventory {
                 addBooties();
                 break;
             case "g":
-                getStock();
+                myShop.getStock();
                 break;
             case "r":
-                getRented();
+                myShop.getRented();
                 break;
             case "e":
                 wantToRent();
