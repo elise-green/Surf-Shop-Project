@@ -15,6 +15,7 @@ public class Wetsuit extends Equipment {
         XS, S, M, L, XL
     }
 
+    //The constructor
     public Wetsuit(Type type, Sizes size) {
         this.type = type;
         this.size = size;
@@ -30,7 +31,7 @@ public class Wetsuit extends Equipment {
     }
 
     @Override
-
+// Method to help ui print names instead of objects
     public String toString() {
         return "Wetsuit(Category =" + getType() + ", Size=" + getSize() + ")";
     }

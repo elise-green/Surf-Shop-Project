@@ -1,6 +1,6 @@
 package model;
 
-
+// The superclass which contains all equipment types and prices
 public class Equipment {
 
     private static final int SURFBOARD_PRICE = 25;
@@ -20,10 +20,9 @@ public class Equipment {
         return WETSUIT_PRICE;
     }
 
+    // The constructor
     public Equipment() {
-
     }
-
 
 
 }

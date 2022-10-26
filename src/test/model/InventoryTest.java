@@ -37,7 +37,15 @@ public class InventoryTest {
         assertEquals(w1.getType(), Wetsuit.Type.WOMENS);
         assertEquals(s1.getClass(), SoftTop.class);
         assertEquals(b1.getSize(), Booties.Sizes.XS);
+        assertEquals(b1.getType(), Booties.Type.MENS);
 
+    }
+
+    @Test
+
+    public void testToString(){
+        assertEquals(w1.toString(), "Wetsuit(Category =WOMENS, Size=M)");
+        assertEquals(b1.toString(), "Booties(Category =KIDS, Size=XS)");
     }
     @Test
 
@@ -125,10 +133,10 @@ public class InventoryTest {
     list.add(b1);
     assertEquals(myInventory.getPrice(list,2),
             (Equipment.getBootiePrice() + Equipment.getSurfboardPrice()) * 2 );
-
+    list.add(w1);
+    assertEquals(myInventory.getPrice(list,1), Equipment.getSurfboardPrice() + Equipment.getBootiePrice()
+    + Equipment.getWetsuitPrice());
 
     }
-
-
 
     }

@@ -69,6 +69,7 @@ public class Inventory {
         return false;
     }
 
+    //EFFECTS: takes a piece of equipment and returns the name of the class as a string
     public String className(Equipment e) {
         if (e.getClass() == SoftTop.class) {
             return "Surfboard";
@@ -96,6 +97,4 @@ public class Inventory {
         }
         return n;
     }
-
-
 }
