@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 public class Booties extends Equipment {
     private Type type;
     private Sizes size;
@@ -21,6 +23,10 @@ public class Booties extends Equipment {
 
     }
 
+    public String getCategory() {
+        return "Booties";
+    }
+
     public Sizes getSize() {
         return size;
     }
@@ -35,4 +41,12 @@ public class Booties extends Equipment {
         return "Booties(Category =" + getType() + ", Size=" + getSize() + ")";
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Category", getCategory());
+        json.put("Type", getType().toString());
+        json.put("Size", getSize().toString());
+        return json;
+    }
 }

@@ -1,7 +1,9 @@
 package model;
 
+import org.json.JSONObject;
+
 // The superclass which contains all equipment types and prices
-public class Equipment {
+public abstract class Equipment implements persistence.Writable {
 
     private static final int SURFBOARD_PRICE = 25;
     private static final int WETSUIT_PRICE = 20;
@@ -23,6 +25,5 @@ public class Equipment {
     // The constructor
     public Equipment() {
     }
-
 
 }

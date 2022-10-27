@@ -1,12 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 //
 //MODIFIES : Equipment
 //EFFECTS: a class to make all the things helps to change the lists of equipment. It stores stock and rented.
 //
-public class Inventory {
+public class Inventory implements persistence.Writable {
     private ArrayList<Equipment> stock;
     private ArrayList<Equipment> rented;
 
@@ -14,7 +17,6 @@ public class Inventory {
     public Inventory() {
         stock = new ArrayList<Equipment>();
         rented = new ArrayList<Equipment>();
-
     }
 
     public ArrayList<Equipment> getStock() {
@@ -96,5 +98,33 @@ public class Inventory {
             }
         }
         return n;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("stock", stockToJson());
+        json.put("rented", rentedToJson());
+        return json;
+    }
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray stockToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Equipment e: getStock()) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
+    }
+    private JSONArray rentedToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Equipment e : getRented()) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
+    }
     }
 }

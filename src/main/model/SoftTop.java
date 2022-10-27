@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // A specific type of surfboard
 public class SoftTop extends Surfboard {
     private int size;
@@ -15,10 +17,31 @@ public class SoftTop extends Surfboard {
         super(size);
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public String getType() {
+        return "Soft top";
+    }
+
+    public String getCategory() {
+        return "Surfboard";
+    }
+
     @Override
 // Method to help ui print names instead of objects
     public String toString() {
         return "Soft top Surfboard(length=" + size + ")";
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Category", getCategory());
+        json.put("Type", getType());
+        json.put("Size", getSize().toString());
+        return json;
     }
 }
 

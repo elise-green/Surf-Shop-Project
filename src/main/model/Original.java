@@ -1,15 +1,28 @@
 package model;
 
+import org.json.JSONObject;
+
 //A specific type of surfboard
 public class Original extends Surfboard {
     private int size;
     //public static final int[] SIZES = {9,8,7,6,5};
 
 
-
-//Constructor
+    //Constructor
     public Original(int size) {
         super(size);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getType() {
+        return "Original";
+    }
+
+    public String getCategory() {
+        return "Surfboard";
     }
 
     @Override
@@ -17,4 +30,15 @@ public class Original extends Surfboard {
     public String toString() {
         return "Original Surfboard(length=" + size + ")";
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Category", getCategory());
+        json.put("Type", getType());
+        json.put("Size", getSize().toString());
+        return json;
+    }
+
+
 }

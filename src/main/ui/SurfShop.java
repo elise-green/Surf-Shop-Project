@@ -2,8 +2,12 @@
 package ui;
 
 
+import persistance.JsonReader;
+import persistance.JsonWriter;
 import model.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,11 +17,21 @@ public class SurfShop extends Inventory {
     private Inventory myShop;
     private Scanner input;
 
+    private JsonWriter jsonWriter;
+
+    private JsonReader jsonReader;
+
+    private static final String JSON_STORE = "./data/inventory.json";
     // EFFECTS: runs the SurfShop application
-    public SurfShop() {
+
+
+    public SurfShop() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        myShop = new SurfShop();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runSurfShop();
     }
-
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runSurfShop() {
@@ -70,6 +84,10 @@ public class SurfShop extends Inventory {
             case "rb":
                 rentBooties();
                 break;
+            case "v":
+                saveInventory();
+            case "l":
+                loadInventory();
             default:
                 System.out.println("Selection not valid...");
                 break;
@@ -82,21 +100,29 @@ public class SurfShop extends Inventory {
         System.out.print("Select size");
         Booties.Sizes size = selectBootieSize();
         ArrayList<Equipment> list = new ArrayList<>();
+        Equipment b = new Booties(Booties.Type.MENS, size);
+        if(b instanceof  Booties){
 
-
-        if (category.equals("MENS")) {
-            list.add(new Booties(Booties.Type.MENS, size));
-            myShop.rentEquipment(list);
-            System.out.println("Rented mens booties...\n");
-        } else if (category.equals("WOMENS")) {
-            list.add(new Booties(Booties.Type.WOMENS, size));
-            myShop.rentEquipment(list);
-            System.out.println("Rented women's booties...\n");
-        } else {
-            list.add(new Booties(Booties.Type.KIDS, size));
-            myShop.rentEquipment(list);
-            System.out.println("Rented kids booties ...\n");
         }
+
+        switch (category) {
+            case "MENS":
+                list.add(new Booties(Booties.Type.MENS, size));
+                myShop.rentEquipment(list);
+                System.out.println("Rented mens booties...\n");
+                break;
+            case "WOMENS":
+                list.add(new Booties(Booties.Type.WOMENS, size));
+                myShop.rentEquipment(list);
+                System.out.println("Rented women's booties...\n");
+                break;
+            case "KIDS":
+                list.add(new Booties(Booties.Type.KIDS, size));
+                myShop.rentEquipment(list);
+                System.out.println("Rented kids booties ...\n");
+                break;
+        }
+        rentBooties();
     }
 
     private void rentWetsuit() {
@@ -229,7 +255,6 @@ public class SurfShop extends Inventory {
             myShop.addEquipment(new Booties(Booties.Type.KIDS, size));
             System.out.println("Added kids booties ...\n");
         }
-
     }
 
 
@@ -331,6 +356,28 @@ public class SurfShop extends Inventory {
                 return Booties.Sizes.XL;
             default:
                 return selectBootieSize();
+        }
+    }
+
+    private void saveInventory() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myShop);
+            jsonWriter.close();
+            System.out.println("Saved " + " My shops inventory" + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadInventory() {
+        try {
+            myShop = jsonReader.read();
+            System.out.println("Loaded " + "My shops inventory" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
