@@ -40,7 +40,7 @@ public class SoftTop extends Surfboard {
         JSONObject json = new JSONObject();
         json.put("Category", getCategory());
         json.put("Type", getType());
-        json.put("Size", getSize().toString());
+        json.put("Size", Integer.toString(getSize()));
         return json;
     }
 }

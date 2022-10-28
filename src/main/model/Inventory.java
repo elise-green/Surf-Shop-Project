@@ -107,16 +107,18 @@ public class Inventory implements persistence.Writable {
         json.put("rented", rentedToJson());
         return json;
     }
+
     // EFFECTS: returns things in this workroom as a JSON array
     private JSONArray stockToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Equipment e: getStock()) {
+        for (Equipment e : getStock()) {
             jsonArray.put(e.toJson());
         }
 
         return jsonArray;
     }
+
     private JSONArray rentedToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -126,5 +128,5 @@ public class Inventory implements persistence.Writable {
 
         return jsonArray;
     }
-    }
 }
+

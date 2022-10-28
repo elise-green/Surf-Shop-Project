@@ -27,13 +27,14 @@ public class SurfShop extends Inventory {
 
     public SurfShop() throws FileNotFoundException {
         input = new Scanner(System.in);
-        myShop = new SurfShop();
+        myShop = new Inventory();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runSurfShop();
     }
     // MODIFIES: this
     // EFFECTS: processes user input
+
     private void runSurfShop() {
         boolean keepGoing = true;
         String command = null;
@@ -100,10 +101,7 @@ public class SurfShop extends Inventory {
         System.out.print("Select size");
         Booties.Sizes size = selectBootieSize();
         ArrayList<Equipment> list = new ArrayList<>();
-        Equipment b = new Booties(Booties.Type.MENS, size);
-        if(b instanceof  Booties){
 
-        }
 
         switch (category) {
             case "MENS":
@@ -190,6 +188,8 @@ public class SurfShop extends Inventory {
         System.out.println("\trw -> rent wetsuit");
         System.out.println("\trb -> rent booties");
         System.out.println("\tr -> get rented");
+        System.out.println("\tv-> save inventory");
+        System.out.println("\tl -> load inventory");
         System.out.println("\tq -> quit");
 
     }
