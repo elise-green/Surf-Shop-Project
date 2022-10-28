@@ -3,6 +3,7 @@ package persistence;
 import model.Inventory;
 
 import model.Equipment;
+import model.Wetsuit;
 import org.junit.jupiter.api.Test;
 import persistance.JsonReader;
 
@@ -24,9 +25,8 @@ class JsonReaderTest {
         }
     }
 
-    @Test
-    void testReaderEmptyStock() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyStock.json");
+ /* @Test
+    void testReaderEmptyFile() {JsonReader reader = new JsonReader("./data/testReaderEmptyStock.json");
         try {
             Inventory inventory = reader.read();
             assertEquals(0, inventory.getStock().size());
@@ -34,13 +34,25 @@ class JsonReaderTest {
             fail("Couldn't read from file");
         }
     }
-
+*/
     @Test
     void  testReaderEmptyRented(){
-        JsonReader reader = new JsonReader("./data/testReaderEmptyRented.json");
+        JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
         try {
             Inventory inventory = reader.read();
             assertEquals(0, inventory.getRented().size());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderGeneral(){
+        JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
+        try {
+            Inventory inventory = reader.read();
+            assertEquals(1, inventory.getStock().size());
+            assertEquals(inventory.getStock().get(0).getClass(), Wetsuit.class);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

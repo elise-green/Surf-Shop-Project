@@ -1,4 +1,20 @@
 {
     "rented": [],
-    "stock": []
+    "stock": [
+        {
+            "Type": "WOMENS",
+            "Category": "Wetsuit",
+            "Size": "S"
+        },
+        {
+            "Type": "KIDS",
+            "Category": "Wetsuit",
+            "Size": "S"
+        },
+        {
+            "Type": "MENS",
+            "Category": "Booties",
+            "Size": "L"
+        }
+    ]
 }

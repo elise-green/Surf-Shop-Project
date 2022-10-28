@@ -32,12 +32,12 @@ class JsonWriterTest{
     void testWriterEmptyInventory() {
         try {
             Inventory i = new Inventory();
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyInventory.json");
+            JsonWriter writer = new JsonWriter("./data/testReaderGeneral.json");
             writer.open();
             writer.write(i);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyInventory.json");
+            JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
             i = reader.read();
             assertEquals(0, i.getStock().size());
             assertEquals(0, i.getRented().size());
