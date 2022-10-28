@@ -25,7 +25,7 @@ class JsonReaderTest {
         }
     }
 
- /* @Test
+  @Test
     void testReaderEmptyFile() {JsonReader reader = new JsonReader("./data/testReaderEmptyStock.json");
         try {
             Inventory inventory = reader.read();
@@ -34,7 +34,7 @@ class JsonReaderTest {
             fail("Couldn't read from file");
         }
     }
-*/
+
     @Test
     void  testReaderEmptyRented(){
         JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
@@ -57,4 +57,11 @@ class JsonReaderTest {
             fail("Couldn't read from file");
         }
     }
+
+    @Test
+
+    public void testToJson(){
+
+    }
+
 }

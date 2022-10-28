@@ -30,14 +30,18 @@ public class InventoryTest {
      list = new ArrayList<Equipment>();
 }
 
-
-
     @Test
     public void testGetters(){
         assertEquals(w1.getType(), Wetsuit.Type.WOMENS);
         assertEquals(s1.getClass(), SoftTop.class);
         assertEquals(b1.getSize(), Booties.Sizes.XS);
-        assertEquals(b1.getType(), Booties.Type.MENS);
+        assertEquals(b1.getType(), Booties.Type.KIDS);
+        assertEquals(s1.getSurfboardPrice(), 25);
+        assertEquals(s1.getCategory(), "Surfboard");
+        assertEquals(w1.getCategory(), "Wetsuit");
+        assertEquals(b1.getCategory(), "Booties");
+
+
 
     }
 
@@ -138,5 +142,6 @@ public class InventoryTest {
     + Equipment.getWetsuitPrice());
 
     }
+
 
     }

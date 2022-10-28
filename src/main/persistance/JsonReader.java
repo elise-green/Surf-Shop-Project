@@ -47,8 +47,8 @@ public class JsonReader {
         return inventory;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: inventory
+    // EFFECTS: parses thingies from JSON object and adds them to the addEquipment function
     private void addStock(Inventory inventory, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("stock");
         for (Object json : jsonArray) {
@@ -56,6 +56,9 @@ public class JsonReader {
             addEquipment(inventory, nextEquipment);
         }
     }
+    //MODIFIES: inventory
+    //EFFECTS: adds the next piece of equipment on the json array
+    // and puts it into the addRented function
 
     private void addRent(Inventory inventory, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("rented");
@@ -65,8 +68,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: inventory
+    // EFFECTS: parses thingy from JSON object and adds it to the stock
     private void addEquipment(Inventory inventory, JSONObject jsonObject) {
         String category = jsonObject.getString("Category");
         if (category.equals("Surfboard")) {
@@ -91,6 +94,8 @@ public class JsonReader {
             inventory.addEquipment(e3);
         }
     }
+    //MODIFIES: inventory
+    // EFFECTS: parses thingy from JSON object and adds it to the rented
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addRented(Inventory inventory, JSONObject jsonObject) {

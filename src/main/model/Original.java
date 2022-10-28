@@ -10,7 +10,7 @@ public class Original extends Surfboard {
 
     //Constructor
     public Original(int size) {
-        super(size);
+        this.size = size;
     }
 
     public int getSize() {

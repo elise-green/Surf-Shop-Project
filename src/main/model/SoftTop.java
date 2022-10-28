@@ -13,8 +13,7 @@ public class SoftTop extends Surfboard {
 
     // Constructor
     public SoftTop(int size) {
-
-        super(size);
+        this.size = size;
     }
 
     public int getSize() {
