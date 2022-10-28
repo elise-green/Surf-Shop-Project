@@ -24,7 +24,7 @@ public class Wetsuit extends Equipment {
 
     }
 
-    public String getCategory(){
+    public String getCategory() {
         return "Wetsuit";
     }
 

@@ -5,6 +5,10 @@ import org.json.JSONObject;
 // The superclass which contains all equipment types and prices
 public abstract class Equipment implements persistence.Writable {
 
+    private String category;
+    private String type;
+    private String size;
+
     private static final int SURFBOARD_PRICE = 25;
     private static final int WETSUIT_PRICE = 20;
     private static final int BOOTIE_PRICE = 10;

@@ -1,24 +1,25 @@
-/*package persistence;
+package persistence;
 
+import model.Equipment;
 import model.Inventory;
-import model.Thingy;
-import model.WorkRoom;
+
+import model.Wetsuit;
 import org.junit.jupiter.api.Test;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JsonWriterTest extends JsonTest {
-    //NOTE TO CPSC 210 STUDENTS: the strategy in designing tests for the JsonWriter is to
-    //write data to a file and then use the reader to read it back in and check that we
-    //read in a copy of what was written out.
+class JsonWriterTest{
 
     @Test
     void testWriterInvalidFile() {
         try {
-            WorkRoom wr = new WorkRoom("My work room");
+            Inventory i = new Inventory();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -28,46 +29,42 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyInventory() {
         try {
-            WorkRoom wr = new WorkRoom("My work room");
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
+            Inventory i = new Inventory();
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyInventory.json");
             writer.open();
-            writer.write(wr);
+            writer.write(i);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
-            wr = reader.read();
-            assertEquals("My work room", wr.getName());
-            assertEquals(0, wr.numThingies());
+            JsonReader reader = new JsonReader("./data/testWriterEmptyInventory.json");
+            i = reader.read();
+            assertEquals(0, i.getStock().size());
+            assertEquals(0, i.getRented().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralInventory() {
         try {
-            WorkRoom wr = new WorkRoom("My work room");
-            wr.addThingy(new Thingy("saw", Category.METALWORK));
-            wr.addThingy(new Thingy("needle", Category.STITCHING));
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            Inventory i = new Inventory();
+            i.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.S));
+
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyInventory.json");
             writer.open();
-            writer.write(wr);
+            writer.write(i);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
-            wr = reader.read();
-            assertEquals("My work room", wr.getName());
-            List<Thingy> thingies = wr.getThingies();
-            assertEquals(2, thingies.size());
-            checkThingy("saw", Category.METALWORK, thingies.get(0));
-            checkThingy("needle", Category.STITCHING, thingies.get(1));
+            JsonReader reader = new JsonReader("./data/testWriterEmptyInventory.json");
+            List<Equipment> stock = i.getStock();
+            assertEquals(1, i.getRented().size());
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
+
 }
 
- */

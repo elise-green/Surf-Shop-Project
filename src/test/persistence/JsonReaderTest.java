@@ -1,4 +1,4 @@
-/*package persistence;
+package persistence;
 
 import model.Inventory;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JsonReaderTest extends JsonTest {
+class JsonReaderTest {
 
     @Test
     void testReaderNonExistentFile() {
@@ -45,20 +45,4 @@ class JsonReaderTest extends JsonTest {
             fail("Couldn't read from file");
         }
     }
-
-    @Test
-    void testReaderGeneralStock() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralStock.json");
-        try {
-            Inventory inventory = reader.read();
-            List<Equipment> list = inventory.getStock();
-            assertEquals(2, list.size());
-            checkEquipment("needle", Category.STITCHING, thingies.get(0));
-            checkThingy("saw", Category.WOODWORK, thingies.get(1));
-        } catch (IOException e) {
-            fail("Couldn't read from file");
-        }
-    }
 }
-/
- */
