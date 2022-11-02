@@ -108,6 +108,15 @@ public class InventoryTest {
         assertFalse(myInventory.inStock(b1));
         assertFalse(myInventory.inStock(b2));
 }
+
+    @Test
+
+    public void testRentEmpty(){
+        myInventory.setStock(list);
+        assertFalse(myInventory.rentEquipment(s1));
+    }
+
+
     @Test
     public void testRentEquipment(){
     list.add(w1);
@@ -116,7 +125,6 @@ public class InventoryTest {
     list.add(s1);
     list.add(s2);
     myInventory.setStock(list);
-    assertEquals(true, myInventory.rentEquipment(w1));
     myInventory.rentEquipment(w1);
     assertEquals(myInventory.getStock().size(),4);
     assertEquals(myInventory.getRented().size(), 1);

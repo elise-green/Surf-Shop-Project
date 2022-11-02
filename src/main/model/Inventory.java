@@ -91,6 +91,7 @@ public class Inventory implements persistence.Writable {
                     if (e.getSize().equals(stock.get(i).getSize())) {
                         d = true;
                         n = i;
+                        break;
                     }
                 }
             }

@@ -64,9 +64,9 @@ class JsonReaderTest {
         }
     }
 
-  /*  @Test
+  @Test
     void testReaderGeneralRented(){
-        JsonReader reader = new JsonReader("./data/testReaderRent.json");
+        JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
         try {
             Inventory inventory = reader.read();
             List<Equipment> rented = inventory.getRented();
@@ -79,6 +79,5 @@ class JsonReaderTest {
             fail("Couldn't read from file");
         }
     }
-*/
 
 }
