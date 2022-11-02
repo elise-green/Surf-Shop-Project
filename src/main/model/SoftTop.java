@@ -5,25 +5,23 @@ import org.json.JSONObject;
 // A specific type of surfboard
 public class SoftTop extends Surfboard {
     private int size;
-   // public static final int[] SIZES;
-
-   // static {
-   //     SIZES = new int[]{10, 9, 8, 7};
-  //  }
 
     // Constructor
     public SoftTop(int size) {
         this.size = size;
     }
 
-    public int getSize() {
-        return size;
+    @Override
+    public String getSize() {
+        return Integer.toString(size);
     }
 
+    @Override
     public String getType() {
         return "Soft top";
     }
 
+    @Override
     public String getCategory() {
         return "Surfboard";
     }
@@ -39,7 +37,7 @@ public class SoftTop extends Surfboard {
         JSONObject json = new JSONObject();
         json.put("Category", getCategory());
         json.put("Type", getType());
-        json.put("Size", Integer.toString(getSize()));
+        json.put("Size", getSize());
         return json;
     }
 }

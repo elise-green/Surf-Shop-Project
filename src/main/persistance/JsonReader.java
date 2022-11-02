@@ -99,32 +99,27 @@ public class JsonReader {
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addRented(Inventory inventory, JSONObject jsonObject) {
-        ArrayList<Equipment> list = new ArrayList<>();
         String category = jsonObject.getString("Category");
         if (category.equals("Surfboard")) {
             String type = String.valueOf(jsonObject.getString("Type"));
             if (type.equals("Soft top")) {
-                Integer size = Integer.valueOf(jsonObject.getInt("Size"));
+                int size = jsonObject.getInt("Size");
                 Equipment e0 = new SoftTop(size);
-                list.add(e0);
-                inventory.rentEquipment(list);
+                inventory.rentEquipment(e0);
             }
-            Integer size = Integer.valueOf(jsonObject.getInt("Size"));
+            int size = jsonObject.getInt("Size");
             Equipment e1 = new Original(size);
-            list.add(e1);
-            inventory.rentEquipment(list);
+            inventory.rentEquipment(e1);
         } else if (category.equals("Wetsuit")) {
             Wetsuit.Type type = Wetsuit.Type.valueOf(jsonObject.getString("Type"));
             Wetsuit.Sizes size = Wetsuit.Sizes.valueOf(jsonObject.getString("Size"));
             Equipment e2 = new Wetsuit(type, size);
-            list.add(e2);
-            inventory.rentEquipment(list);
+            inventory.rentEquipment(e2);
         } else {
             Booties.Type type = Booties.Type.valueOf(jsonObject.getString("Type"));
             Booties.Sizes size = Booties.Sizes.valueOf(jsonObject.getString("Size"));
             Equipment e3 = new Booties(type, size);
-            list.add(e3);
-            inventory.rentEquipment(list);
+            inventory.rentEquipment(e3);
         }
     }
 }

@@ -100,23 +100,22 @@ public class SurfShop extends Inventory {
         String category = selectRange();
         System.out.print("Select size");
         Booties.Sizes size = selectBootieSize();
-        ArrayList<Equipment> list = new ArrayList<>();
 
 
         switch (category) {
             case "MENS":
-                list.add(new Booties(Booties.Type.MENS, size));
-                myShop.rentEquipment(list);
+                Equipment z = new Booties(Booties.Type.MENS, size);
+                myShop.rentEquipment(z);
                 System.out.println("Rented mens booties...\n");
                 break;
             case "WOMENS":
-                list.add(new Booties(Booties.Type.WOMENS, size));
-                myShop.rentEquipment(list);
+                Equipment y = new Booties(Booties.Type.WOMENS, size);
+                myShop.rentEquipment(y);
                 System.out.println("Rented women's booties...\n");
                 break;
             case "KIDS":
-                list.add(new Booties(Booties.Type.KIDS, size));
-                myShop.rentEquipment(list);
+                Equipment x = new Booties(Booties.Type.KIDS, size);
+                myShop.rentEquipment(x);
                 System.out.println("Rented kids booties ...\n");
                 break;
         }
@@ -130,19 +129,18 @@ public class SurfShop extends Inventory {
         System.out.print("Select size ");
         Wetsuit.Sizes size = selectWetsuitSize();
 
-        ArrayList<Equipment> list = new ArrayList<>();
 
         if (category.equals("MENS")) {
-            list.add(new Wetsuit(Wetsuit.Type.MENS, size));
-            myShop.rentEquipment(list);
+            Equipment c = new Wetsuit(Wetsuit.Type.MENS, size);
+            myShop.rentEquipment(c);
             System.out.println("Rented a mens wetsuit...\n");
         } else if (category.equals("WOMENS")) {
-            list.add(new Wetsuit(Wetsuit.Type.WOMENS, size));
-            myShop.rentEquipment(list);
+            Equipment a = new Wetsuit(Wetsuit.Type.WOMENS, size);
+            myShop.rentEquipment(a);
             System.out.println("Rented a women's wetsuit...\n");
         } else {
-            list.add(new Wetsuit(Wetsuit.Type.KIDS, size));
-            myShop.rentEquipment(list);
+            Equipment b = new Wetsuit(Wetsuit.Type.KIDS, size);
+            myShop.rentEquipment(b);
             System.out.println("Rented a kids wetsuit...\n");
         }
     }
@@ -154,17 +152,14 @@ public class SurfShop extends Inventory {
         int length = input.nextInt();
         System.out.println("Enter action");
 
-        ArrayList<Equipment> list = new ArrayList<>();
 
 
         if (type.equals("Softtop")) {
-            SoftTop x = new SoftTop(length);
-            list.add(x);
-            myShop.rentEquipment(list);
+            Equipment x = new SoftTop(length);
+            myShop.rentEquipment(x);
         } else {
-            Original y = new Original(length);
-            list.add(y);
-            myShop.rentEquipment(list);
+            Equipment y = new Original(length);
+            myShop.rentEquipment(y);
         }
         System.out.println("surfboard was rented");
     }

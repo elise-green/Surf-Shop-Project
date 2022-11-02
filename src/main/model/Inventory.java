@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 //
 //MODIFIES : Equipment
@@ -15,8 +16,8 @@ public class Inventory implements persistence.Writable {
 
 
     public Inventory() {
-        stock = new ArrayList<Equipment>();
-        rented = new ArrayList<Equipment>();
+        stock = new ArrayList<>();
+        rented = new ArrayList<>();
     }
 
     public ArrayList<Equipment> getStock() {
@@ -62,13 +63,43 @@ public class Inventory implements persistence.Writable {
     //REQUIRES:
     //MODIFIES: rented and stock
     //EFFECTS:  removes a piece of equipment from rented or stock
-    public boolean rentEquipment(ArrayList<Equipment> items) {
-        if (stock.containsAll(items)) {
-            stock.removeAll(items);
-            rented.addAll(items);
-            return true;
+  /*  public boolean rentEquipment(Equipment e) {
+        for (int i = 0; i < stock.size(); i++) {
+            if (stock.get(i).getCategory().equals(e.getCategory())) {
+                if (stock.get(i).getType().equals(e.getType())) {
+                    if (stock.get(i).getSize().equals(e.getSize())) {
+                        rented.add(e);
+                        stock.remove(stock.get(i));
+                        return true;
+                    }
+                }
+            }
+
         }
         return false;
+    }
+*/
+
+
+
+    public boolean rentEquipment(Equipment e) {
+        Boolean d = false;
+        int n = 0;
+        for (int i = 0; i < stock.size(); i++) {
+            if (e.getCategory().equals(stock.get(i).getCategory())) {
+                if (e.getType().equals(stock.get(i).getType())) {
+                    if (e.getSize().equals(stock.get(i).getSize())) {
+                        d = true;
+                        n = i;
+                    }
+                }
+            }
+        }
+        if (d) {
+            stock.remove(n);
+            rented.add(e);
+        }
+        return d;
     }
 
     //EFFECTS: takes a piece of equipment and returns the name of the class as a string
@@ -88,11 +119,11 @@ public class Inventory implements persistence.Writable {
     public int getPrice(ArrayList<Equipment> items, int time) {
         int n = 0;
         for (int i = 0; i < items.size(); i++) {
-            if (className(items.get(i)) == "Surfboard") {
+            if (className(items.get(i)).equals("Surfboard")) {
                 n += (Equipment.getSurfboardPrice() * time);
-            } else if (className(items.get(i)) == "Wetsuit") {
+            } else if (Objects.equals(className(items.get(i)), "Wetsuit")) {
                 n += (Equipment.getWetsuitPrice() * time);
-            } else if (className(items.get(i)) == "Booties") {
+            } else if (Objects.equals(className(items.get(i)), "Booties")) {
                 n += (Equipment.getBootiePrice() * time);
 
             }

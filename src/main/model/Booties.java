@@ -20,19 +20,21 @@ public class Booties extends Equipment {
     public Booties(Type type, Sizes size) {
         this.type = type;
         this.size = size;
-
     }
 
+    @Override
     public String getCategory() {
         return "Booties";
     }
 
-    public Sizes getSize() {
-        return size;
+    @Override
+    public String getSize() {
+        return size.toString();
     }
 
-    public Type getType() {
-        return type;
+    @Override
+    public String getType() {
+        return type.toString();
     }
 
     @Override
@@ -45,8 +47,8 @@ public class Booties extends Equipment {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Category", getCategory());
-        json.put("Type", getType().toString());
-        json.put("Size", getSize().toString());
+        json.put("Type", getType());
+        json.put("Size", getSize());
         return json;
     }
 }

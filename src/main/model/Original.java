@@ -13,14 +13,17 @@ public class Original extends Surfboard {
         this.size = size;
     }
 
-    public int getSize() {
-        return size;
+    @Override
+    public String getSize() {
+        return Integer.toString(size);
     }
 
+    @Override
     public String getType() {
         return "Original";
     }
 
+    @Override
     public String getCategory() {
         return "Surfboard";
     }
@@ -36,7 +39,7 @@ public class Original extends Surfboard {
         JSONObject json = new JSONObject();
         json.put("Category", getCategory());
         json.put("Type", getType());
-        json.put("Size", Integer.toString(getSize()));
+        json.put("Size", getSize());
         return json;
     }
 

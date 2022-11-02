@@ -1,5 +1,6 @@
 package model;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ public class InventoryTest {
    private Surfboard s2;
    private Wetsuit w1;
    private Wetsuit w2;
+   private Wetsuit w3;
    private Booties b1;
    private Booties b2;
    private ArrayList<Equipment> list;
@@ -25,23 +27,26 @@ public class InventoryTest {
      s2 = new Original(6);
      w1 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M);
      w2 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.XL);
+     w3 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M);
      b1 = new Booties(Booties.Type.KIDS, Booties.Sizes.XS);
      b2 = new Booties(Booties.Type.MENS, Booties.Sizes.L);
-     list = new ArrayList<Equipment>();
+     list = new ArrayList<>();
+
 }
 
     @Test
     public void testGetters(){
-        assertEquals(w1.getType(), Wetsuit.Type.WOMENS);
+        assertEquals(w1.getType(), "WOMENS");
         assertEquals(s1.getClass(), SoftTop.class);
-        assertEquals(b1.getSize(), Booties.Sizes.XS);
-        assertEquals(b1.getType(), Booties.Type.KIDS);
-        assertEquals(s1.getSurfboardPrice(), 25);
+        assertEquals(b1.getSize(), "XS");
+        assertEquals(b1.getType(), "KIDS");
+        assertEquals(s1.getSize(), "8");
+        assertEquals(s2.getSize(), "6");
+        assertEquals(s1.getType(), "Soft top");
+        assertEquals(s2.getType(), "Original");
         assertEquals(s1.getCategory(), "Surfboard");
         assertEquals(w1.getCategory(), "Wetsuit");
         assertEquals(b1.getCategory(), "Booties");
-
-
 
     }
 
@@ -106,15 +111,16 @@ public class InventoryTest {
     @Test
     public void testRentEquipment(){
     list.add(w1);
+    list.add(w3);
     list.add(w2);
     list.add(s1);
     list.add(s2);
     myInventory.setStock(list);
-    assertTrue(myInventory.rentEquipment(list));
-    myInventory.rentEquipment(list);
-    assertEquals(myInventory.getStock().size(),0);
-    assertEquals(myInventory.getRented().size(), list.size());
-    assertEquals(myInventory.getRented().size(), list.size());
+    assertEquals(true, myInventory.rentEquipment(w1));
+    myInventory.rentEquipment(w1);
+    assertEquals(myInventory.getStock().size(),4);
+    assertEquals(myInventory.getRented().size(), 1);
+    assertFalse(myInventory.rentEquipment(b1));
     }
 
     @Test
@@ -142,6 +148,5 @@ public class InventoryTest {
     + Equipment.getWetsuitPrice());
 
     }
-
 
     }

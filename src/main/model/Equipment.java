@@ -1,13 +1,8 @@
 package model;
 
-import org.json.JSONObject;
-
 // The superclass which contains all equipment types and prices
 public abstract class Equipment implements persistence.Writable {
 
-    private String category;
-    private String type;
-    private String size;
 
     private static final int SURFBOARD_PRICE = 25;
     private static final int WETSUIT_PRICE = 20;
@@ -28,6 +23,18 @@ public abstract class Equipment implements persistence.Writable {
 
     // The constructor
     public Equipment() {
+    }
+
+    public String getCategory() {
+        return "";
+    }
+
+    public String getType() {
+        return "";
+    }
+
+    public String getSize() {
+        return "";
     }
 
 }

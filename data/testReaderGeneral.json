@@ -4,5 +4,9 @@
         "Category": "Wetsuit",
         "Size": "S"
     }],
-    "rented": []
+    "rented": [{
+        "Type": "Soft top",
+        "Category": "Surfboard",
+        "Size": "8"
+    }]
 }
