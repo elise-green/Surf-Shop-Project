@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Booties extends Equipment {
     private Type type;
     private Sizes size;
@@ -14,6 +16,24 @@ public class Booties extends Equipment {
 
     public enum Sizes {
         XS, S, M, L, XL
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Booties booties = (Booties) o;
+        return type == booties.type && size == booties.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, size);
     }
 
     // The constructor

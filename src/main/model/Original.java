@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 //A specific type of surfboard
 public class Original extends Surfboard {
     private int size;
@@ -11,6 +13,23 @@ public class Original extends Surfboard {
     //Constructor
     public Original(int size) {
         this.size = size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Original original = (Original) o;
+        return size == original.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(size);
     }
 
     @Override

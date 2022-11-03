@@ -2,19 +2,14 @@
     "rented": [],
     "stock": [
         {
+            "Type": "Original",
+            "Category": "Surfboard",
+            "Size": "7"
+        },
+        {
             "Type": "WOMENS",
             "Category": "Wetsuit",
             "Size": "S"
-        },
-        {
-            "Type": "KIDS",
-            "Category": "Wetsuit",
-            "Size": "S"
-        },
-        {
-            "Type": "MENS",
-            "Category": "Booties",
-            "Size": "L"
         }
     ]
 }

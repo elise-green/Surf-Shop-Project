@@ -1,12 +1,4 @@
 {
-    "stock": [{
-        "Type": "KIDS",
-        "Category": "Wetsuit",
-        "Size": "S"
-    }],
-    "rented": [{
-        "Type": "Soft top",
-        "Category": "Surfboard",
-        "Size": "8"
-    }]
+    "rented": [],
+    "stock": []
 }

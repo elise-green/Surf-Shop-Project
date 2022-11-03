@@ -49,7 +49,7 @@ class JsonReaderTest {
 
     @Test
     void testReaderGeneralStock(){
-        JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
+        JsonReader reader = new JsonReader("./data/testWriterGeneral.json");
         try {
             Inventory inventory = reader.read();
             List<Equipment> stock = inventory.getStock();
@@ -66,7 +66,7 @@ class JsonReaderTest {
 
   @Test
     void testReaderGeneralRented(){
-        JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
+        JsonReader reader = new JsonReader("./data/testWriterGeneral.json");
         try {
             Inventory inventory = reader.read();
             List<Equipment> rented = inventory.getRented();

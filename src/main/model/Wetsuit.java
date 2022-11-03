@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Wetsuit extends Equipment {
     private Wetsuit.Type type;
     private Wetsuit.Sizes size;
@@ -20,6 +22,23 @@ public class Wetsuit extends Equipment {
         this.type = type;
         this.size = size;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Wetsuit wetsuit = (Wetsuit) o;
+        return type == wetsuit.type && size == wetsuit.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, size);
     }
 
     @Override

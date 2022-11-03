@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 // A specific type of surfboard
 public class SoftTop extends Surfboard {
     private int size;
@@ -19,6 +21,24 @@ public class SoftTop extends Surfboard {
     @Override
     public String getType() {
         return "Soft top";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SoftTop softTop = (SoftTop) o;
+        return size == softTop.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(size);
     }
 
     @Override

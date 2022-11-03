@@ -60,29 +60,8 @@ public class Inventory implements persistence.Writable {
         return stock.contains(piece);
     }
 
-    //REQUIRES:
-    //MODIFIES: rented and stock
-    //EFFECTS:  removes a piece of equipment from rented or stock
+
   /*  public boolean rentEquipment(Equipment e) {
-        for (int i = 0; i < stock.size(); i++) {
-            if (stock.get(i).getCategory().equals(e.getCategory())) {
-                if (stock.get(i).getType().equals(e.getType())) {
-                    if (stock.get(i).getSize().equals(e.getSize())) {
-                        rented.add(e);
-                        stock.remove(stock.get(i));
-                        return true;
-                    }
-                }
-            }
-
-        }
-        return false;
-    }
-*/
-
-
-
-    public boolean rentEquipment(Equipment e) {
         Boolean d = false;
         int n = 0;
         for (int i = 0; i < stock.size(); i++) {
@@ -101,6 +80,18 @@ public class Inventory implements persistence.Writable {
             rented.add(e);
         }
         return d;
+    }
+*/
+
+    public boolean rentEquipment(Equipment e) {
+        for (int i = 0; i < stock.size(); i++) {
+            if (stock.get(i).equals(e)) {
+                stock.remove(i);
+                rented.add(e);
+                return true;
+            }
+        }
+        return false;
     }
 
     //EFFECTS: takes a piece of equipment and returns the name of the class as a string
