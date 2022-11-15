@@ -153,15 +153,17 @@ public class SurfShop extends Inventory {
         System.out.println("Enter action");
 
 
-
-        if (type.equals("Softtop")) {
+        if (type.equals("softtop")) {
             Equipment x = new SoftTop(length);
             myShop.rentEquipment(x);
-        } else {
+            System.out.println("surfboard was rented");
+        } else if (type.equals("original")) {
             Equipment y = new Original(length);
             myShop.rentEquipment(y);
+            System.out.println("surfboard was rented");
+        } else {
+            selectType();
         }
-        System.out.println("surfboard was rented");
     }
 
     // MODIFIES: this
@@ -199,15 +201,17 @@ public class SurfShop extends Inventory {
         System.out.println("Enter action");
 
 
-        if (type.equals("Softtop")) {
+        if (type.equals("softtop")) {
             SoftTop x = new SoftTop(length);
             myShop.addEquipment(x);
-
-        } else {
+            System.out.println("new surfboard was added");
+        } else if (type.equals("original")) {
             Original y = new Original(length);
             myShop.addEquipment(y);
+            System.out.println("new surfboard was added");
+        } else {
+            addSurfboard();
         }
-        System.out.println("new surfboard was added");
     }
 
     // MODIFIES: this
@@ -226,9 +230,11 @@ public class SurfShop extends Inventory {
         } else if (category.equals("WOMENS")) {
             myShop.addEquipment(new Wetsuit(Wetsuit.Type.WOMENS, size));
             System.out.println("Added a women's wetsuit...\n");
-        } else {
+        } else if (category.equals("KIDS")) {
             myShop.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, size));
             System.out.println("Added a kids wetsuit...\n");
+        } else {
+            addWetsuit();
         }
 
     }
@@ -246,9 +252,11 @@ public class SurfShop extends Inventory {
         } else if (category.equals("WOMENS")) {
             myShop.addEquipment(new Booties(Booties.Type.WOMENS, size));
             System.out.println("Added women's booties...\n");
-        } else {
+        } else if (category.equals("KIDS")) {
             myShop.addEquipment(new Booties(Booties.Type.KIDS, size));
             System.out.println("Added kids booties ...\n");
+        } else {
+            addBooties();
         }
     }
 
@@ -266,8 +274,11 @@ public class SurfShop extends Inventory {
 
         if (selection.equals("s")) {
             return "softtop";
-        } else {
+        } else if (selection.equals("o")) {
             return "original";
+        } else {
+            selectType();
+            return "redo";
         }
     }
 

@@ -49,15 +49,15 @@ class JsonReaderTest {
 
     @Test
     void testReaderGeneralStock(){
-        JsonReader reader = new JsonReader("./data/testWriterGeneral.json");
+        JsonReader reader = new JsonReader("./data/testReaderGeneral.json");
         try {
             Inventory inventory = reader.read();
             List<Equipment> stock = inventory.getStock();
             List<Equipment> rented = inventory.getRented();
             assertEquals(1, stock.size());
-            assertEquals(stock.get(0).getCategory(), "Wetsuit");
-            assertEquals("KIDS", stock.get(0).getType());
-            assertEquals("S", stock.get(0).getSize());
+            assertEquals(stock.get(0).getCategory(), "Surfboard");
+            assertEquals("Soft top", stock.get(0).getType());
+            assertEquals("7", stock.get(0).getSize());
 
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -66,7 +66,7 @@ class JsonReaderTest {
 
   @Test
     void testReaderGeneralRented(){
-        JsonReader reader = new JsonReader("./data/testWriterGeneral.json");
+        JsonReader reader = new JsonReader("./data/testReaderRent.json");
         try {
             Inventory inventory = reader.read();
             List<Equipment> rented = inventory.getRented();

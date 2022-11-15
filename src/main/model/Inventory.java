@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Vector;
 
 //
 //MODIFIES : Equipment
@@ -20,7 +21,7 @@ public class Inventory implements persistence.Writable {
         rented = new ArrayList<>();
     }
 
-    public ArrayList<Equipment> getStock() {
+    public ArrayList getStock() {
         return stock;
     }
 

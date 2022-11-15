@@ -78,10 +78,12 @@ public class JsonReader {
                 Integer size = Integer.valueOf(jsonObject.getInt("Size"));
                 Equipment e0 = new SoftTop(size);
                 inventory.addEquipment(e0);
+            } else if (type.equals("Original")) {
+                Integer size = Integer.valueOf(jsonObject.getInt("Size"));
+                Equipment e1 = new Original(size);
+                inventory.addEquipment(e1);
             }
-            Integer size = Integer.valueOf(jsonObject.getInt("Size"));
-            Equipment e1 = new Original(size);
-            inventory.addEquipment(e1);
+
         } else if (category.equals("Wetsuit")) {
             Wetsuit.Type type = Wetsuit.Type.valueOf(jsonObject.getString("Type"));
             Wetsuit.Sizes size = Wetsuit.Sizes.valueOf(jsonObject.getString("Size"));
@@ -94,6 +96,7 @@ public class JsonReader {
             inventory.addEquipment(e3);
         }
     }
+
     //MODIFIES: inventory
     // EFFECTS: parses thingy from JSON object and adds it to the rented
 
@@ -103,13 +106,15 @@ public class JsonReader {
         if (category.equals("Surfboard")) {
             String type = String.valueOf(jsonObject.getString("Type"));
             if (type.equals("Soft top")) {
-                int size = jsonObject.getInt("Size");
+                Integer size = Integer.valueOf(jsonObject.getInt("Size"));
                 Equipment e0 = new SoftTop(size);
                 inventory.rentEquipment(e0);
+            } else if (type.equals("Original")) {
+                Integer size = Integer.valueOf(jsonObject.getInt("Size"));
+                Equipment e1 = new Original(size);
+                inventory.rentEquipment(e1);
             }
-            int size = jsonObject.getInt("Size");
-            Equipment e1 = new Original(size);
-            inventory.rentEquipment(e1);
+
         } else if (category.equals("Wetsuit")) {
             Wetsuit.Type type = Wetsuit.Type.valueOf(jsonObject.getString("Type"));
             Wetsuit.Sizes size = Wetsuit.Sizes.valueOf(jsonObject.getString("Size"));

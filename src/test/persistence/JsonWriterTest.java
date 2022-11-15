@@ -3,6 +3,7 @@ package persistence;
 import model.Equipment;
 import model.Inventory;
 
+import model.SoftTop;
 import model.Wetsuit;
 import org.junit.jupiter.api.Test;
 import persistance.JsonReader;
@@ -51,15 +52,19 @@ class JsonWriterTest{
         try {
             Inventory i = new Inventory();
             i.addEquipment(new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.S));
+            i.addEquipment(new SoftTop(7));
+            i.rentEquipment(new SoftTop(7));
 
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyInventory.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneral.json");
             writer.open();
             writer.write(i);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyInventory.json");
-            List<Equipment> stock = i.getStock();
+            JsonReader reader = new JsonReader("./data/testWriterGeneral.json");
+            i = reader.read();
+
             assertEquals(1, i.getRented().size());
+            assertEquals(1, i.getStock().size());
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
