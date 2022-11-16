@@ -4,15 +4,24 @@ import model.Equipment;
 import model.Inventory;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class StockList extends JFrame {
-        JList list;
-        JPanel panel;
+public class StockList {
 
-        public StockList(Inventory shop){
-            list.setListData(shop.getStock().toArray());
-            panel.add(list);
-            }
+    private JPanel panel = new JPanel();
+    private JList<Equipment> list = new JList<>();
+   private  DefaultListModel modelList = new DefaultListModel<>();
+    private JScrollPane sp;
+
+    public StockList(Inventory shop) {
+
+        for (int i = 0; i < shop.getStock().size(); i++) {
+            modelList.addElement(shop.getStock().get(i));
+        }
+        list.setModel(modelList);
+        sp = new JScrollPane(list);
+        panel.add(sp);
+    }
 
     public JPanel getPanel() {
         return panel;

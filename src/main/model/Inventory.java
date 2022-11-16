@@ -21,7 +21,7 @@ public class Inventory implements persistence.Writable {
         rented = new ArrayList<>();
     }
 
-    public ArrayList getStock() {
+    public ArrayList<Equipment> getStock() {
         return stock;
     }
 

@@ -17,9 +17,12 @@ public class GUI extends JFrame {
 
     JPanel mainPanel = new JPanel();
     JPanel gRent = new JPanel();
-    JPanel gStock = StockList(myShop).getPanel();
+
+    StockList stockList;
     JPanel addRent = new JPanel();
     JPanel addStock = new JPanel();
+
+    AddEquipment addEquipment = new AddEquipment();
 
     private  JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private  JsonReader jsonReader = new JsonReader(JSON_STORE);
@@ -52,17 +55,19 @@ public class GUI extends JFrame {
         mainPanel.add(saveButton);
         mainPanel.add(loadButton);
         gRent.add(gRentLabel);
-        gStock.add(gStockLabel);
+
+
         saveButton.addActionListener(new SaveButtonListener());
         loadButton.addActionListener(new LoadButtonListener());
 
         tabbedPane.addTab("Main", mainPanel);
         tabbedPane.addTab("Get Rented", gRent);
-        tabbedPane.addTab("Get Stock", gStock);
+        tabbedPane.addTab("Get Stock", addStock);
         tabbedPane.add("Rent Equipment", addRent);
-        tabbedPane.add("Add Stock", addStock);
+        tabbedPane.add("Add Stock",addStock);
         add(tabbedPane);
 
+        stockList = new StockList(myShop);
     }
 
 
@@ -98,7 +103,7 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent event) {
             try {
                 myShop = jsonReader.read();
-                JOptionPane.showMessageDialog(null ,"Loaded " + "My shops inventory" + " from " + JSON_STORE);
+                JOptionPane.showMessageDialog(null ,"Loaded" + "My shops inventory" + " from " + JSON_STORE);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
             }
