@@ -1,6 +1,5 @@
 package ui;
 
-import model.Inventory;
 import org.w3c.dom.events.MouseEvent;
 
 import javax.swing.*;
@@ -10,17 +9,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
 
-public class AddEquipment {
+public class RentEquipment {
     private JPanel mainPanel;
     private JButton surfButton;
     private JButton wetsuitButton;
     private JButton bootButton;
 
-    public AddEquipment(Inventory shop) {
+    public RentEquipment() {
         mainPanel = new JPanel();
-        surfButton = new JButton("Add Surfboard");
-        wetsuitButton = new JButton("Add Wetsuit");
-        bootButton = new JButton("Add Booties");
+        surfButton = new JButton("Rent Surfboard");
+        wetsuitButton = new JButton("Rent Wetsuit");
+        bootButton = new JButton("Rent Booties");
 
         surfButton.addActionListener(new SurfButtonListener());
         wetsuitButton.addActionListener(new WetsuitButtonListener());
@@ -38,30 +37,27 @@ public class AddEquipment {
 
     private class SurfButtonListener implements ActionListener {
 
-        private JSplitPane splitPane;
-        private JPanel leftPanel;
-        private JPanel rightPanel;
-        private JLabel sizeLabel;
-        private JLabel typeLabel;
-        private JRadioButton type1;
-        private JRadioButton type2;
-        private JRadioButton size6;
-        private JRadioButton size7;
-        private JRadioButton size8;
-        private JRadioButton size9;
-        private JRadioButton size10;
+        JSplitPane splitPane;
+        JPanel leftPanel;
+        JPanel rightPanel;
+        JLabel sizeLabel;
+        JLabel typeLabel;
+        JRadioButton type1;
+        JRadioButton type2;
+        JRadioButton size6;
+        JRadioButton size7;
+        JRadioButton size8;
+        JRadioButton size9;
+        JRadioButton size10;
 
-        private ButtonGroup buttonGroup1;
-        private ButtonGroup buttonGroup2;
-
-        private JButton add;
+        JButton add;
 
 
-        public SurfButtonListener(Inventory shop) {
+        public SurfButtonListener() {
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-        public JSplitPane surfPanel() {
+        private JSplitPane surfPanel() {
             leftPanel = new JPanel();
             rightPanel = new JPanel();
 
@@ -88,16 +84,6 @@ public class AddEquipment {
             rightPanel.add(size10);
             rightPanel.add(add);
 
-            buttonGroup1 = new ButtonGroup();
-            buttonGroup2 = new ButtonGroup();
-            buttonGroup1.add(type1);
-            buttonGroup1.add(type2);
-            buttonGroup2.add(size6);
-            buttonGroup2.add(size7);
-            buttonGroup2.add(size8);
-            buttonGroup2.add(size9);
-            buttonGroup2.add(size10);
-
             splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
             return splitPane;
         }
@@ -110,20 +96,18 @@ public class AddEquipment {
 
         private class AddNewBoard implements ActionListener {
 
-            public AddNewBoard(Inventory shop) {
+            public AddNewBoard() {
             }
 
             @Override
 
             public void actionPerformed(ActionEvent event) {
-
             }
 
         }
     }
 
     private class WetsuitButtonListener implements ActionListener {
-
         private JSplitPane splitPane;
         private JPanel leftPanel;
         private JPanel rightPanel;
@@ -143,11 +127,10 @@ public class AddEquipment {
 
         private ButtonGroup buttonGroup1;
         private ButtonGroup buttonGroup2;
-
         public WetsuitButtonListener() {
+
         }
 
-        @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
         private JSplitPane wetsuitPanel() {
             leftPanel = new JPanel();
             rightPanel = new JPanel();
@@ -163,7 +146,7 @@ public class AddEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new AddNewWetsuit());
+            add.addActionListener(new RentNewWetsuit());
 
 
             buttonGroup1 = new ButtonGroup();
@@ -193,25 +176,24 @@ public class AddEquipment {
             return splitPane;
         }
 
+
         @Override
         public void actionPerformed(ActionEvent event) {
             JOptionPane.showMessageDialog(null, wetsuitPanel());
         }
 
-        private class AddNewWetsuit implements ActionListener {
+        private class RentNewWetsuit implements ActionListener {
 
-            public AddNewWetsuit() {
+            public RentNewWetsuit(){
+
             }
-
             @Override
             public void actionPerformed(ActionEvent event) {
-
             }
         }
     }
 
     private class BootButtonListener implements ActionListener {
-
         private JSplitPane splitPane;
         private JPanel leftPanel;
         private JPanel rightPanel;
@@ -231,11 +213,10 @@ public class AddEquipment {
 
         private ButtonGroup buttonGroup1;
         private ButtonGroup buttonGroup2;
-
         public BootButtonListener() {
+
         }
 
-        @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
         public JSplitPane bootPanel() {
             leftPanel = new JPanel();
             rightPanel = new JPanel();
@@ -252,7 +233,7 @@ public class AddEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new AddNewBoot());
+            add.addActionListener(new RentNewBoot());
 
             buttonGroup1 = new ButtonGroup();
             buttonGroup2 = new ButtonGroup();
@@ -264,7 +245,6 @@ public class AddEquipment {
             buttonGroup2.add(size3);
             buttonGroup2.add(size4);
             buttonGroup2.add(size5);
-
 
             leftPanel.add(typeLabel);
             leftPanel.add(type1);
@@ -284,23 +264,18 @@ public class AddEquipment {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-
             JOptionPane.showMessageDialog(null, bootPanel());
 
         }
 
-        private class AddNewBoot implements ActionListener {
+        private class RentNewBoot implements ActionListener {
 
-            public AddNewBoot() {
-
-            }
+            public RentNewBoot(){}
 
             @Override
             public void actionPerformed(ActionEvent event) {
 
             }
-
         }
     }
 }
-

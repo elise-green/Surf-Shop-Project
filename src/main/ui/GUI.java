@@ -18,16 +18,19 @@ public class GUI extends JFrame {
     JPanel mainPanel = new JPanel();
     JPanel gRent = new JPanel();
 
-    StockList stockList;
+    private StockList stockList;
+    private RentList rentList;
+
+
     JPanel addRent = new JPanel();
     JPanel addStock = new JPanel();
 
-    AddEquipment addEquipment = new AddEquipment();
-
+   private AddEquipment addEquipment = new AddEquipment();
+   private RentEquipment rentEquipment = new RentEquipment();
     private  JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private  JsonReader jsonReader = new JsonReader(JSON_STORE);
-    private Inventory myShop;
-    private static final String JSON_STORE = "./data/inventory.json";
+    private Inventory myShop = new Inventory();
+    private static final String JSON_STORE = "./data/testWriterGeneral.json";
     JButton saveButton = new JButton("Save");
     JButton loadButton = new JButton("Load");
 
@@ -56,18 +59,21 @@ public class GUI extends JFrame {
         mainPanel.add(loadButton);
         gRent.add(gRentLabel);
 
+        stockList = new StockList(myShop);
+        rentList = new RentList(myShop);
+
 
         saveButton.addActionListener(new SaveButtonListener());
         loadButton.addActionListener(new LoadButtonListener());
 
         tabbedPane.addTab("Main", mainPanel);
-        tabbedPane.addTab("Get Rented", gRent);
-        tabbedPane.addTab("Get Stock", addStock);
-        tabbedPane.add("Rent Equipment", addRent);
-        tabbedPane.add("Add Stock",addStock);
+        tabbedPane.addTab("Get Rented", rentList.getPanel());
+        tabbedPane.addTab("Get Stock", stockList.getPanel());
+        tabbedPane.add("Rent Equipment", rentEquipment.getMainPanel());
+        tabbedPane.add("Add Stock",addEquipment.getMainPanel());
         add(tabbedPane);
 
-        stockList = new StockList(myShop);
+
     }
 
 
@@ -79,7 +85,6 @@ public class GUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            myShop = new Inventory();
             try {
                 jsonWriter.open();
                 jsonWriter.write(myShop);

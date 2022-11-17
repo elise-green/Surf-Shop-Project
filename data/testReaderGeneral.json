@@ -1,8 +1,4 @@
 {
     "rented": [],
-    "stock": [{
-        "Type": "Soft top",
-        "Category": "Surfboard",
-        "Size": "7"
-    }]
+    "stock": []
 }

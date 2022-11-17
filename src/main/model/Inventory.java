@@ -84,7 +84,7 @@ public class Inventory implements persistence.Writable {
     }
 */
 
-    public boolean rentEquipment(Equipment e) {
+    public boolean rentEquipment(Equipment e)  {
         for (int i = 0; i < stock.size(); i++) {
             if (stock.get(i).equals(e)) {
                 stock.remove(i);
