@@ -1,13 +1,13 @@
 package ui;
 
+import model.Equipment;
 import model.Inventory;
-import org.w3c.dom.events.MouseEvent;
+import model.Original;
+import model.SoftTop;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 
 
 public class AddEquipment {
@@ -16,15 +16,21 @@ public class AddEquipment {
     private JButton wetsuitButton;
     private JButton bootButton;
 
-    public AddEquipment(Inventory shop) {
+    private Inventory myShop;
+
+    private GUI gui;
+
+    public AddEquipment(Inventory shop, GUI g) {
         mainPanel = new JPanel();
         surfButton = new JButton("Add Surfboard");
         wetsuitButton = new JButton("Add Wetsuit");
         bootButton = new JButton("Add Booties");
+        myShop = shop;
+        gui = g;
 
-        surfButton.addActionListener(new SurfButtonListener());
-        wetsuitButton.addActionListener(new WetsuitButtonListener());
-        bootButton.addActionListener(new BootButtonListener());
+        surfButton.addActionListener(new SurfButtonListener(myShop, gui));
+        wetsuitButton.addActionListener(new WetsuitButtonListener(myShop, gui));
+        bootButton.addActionListener(new BootButtonListener(myShop, gui));
 
         mainPanel.add(surfButton);
         mainPanel.add(wetsuitButton);
@@ -56,8 +62,13 @@ public class AddEquipment {
 
         private JButton add;
 
+        private Inventory myShop;
 
-        public SurfButtonListener(Inventory shop) {
+        private GUI gui;
+
+        public SurfButtonListener(Inventory shop, GUI g) {
+            myShop = shop;
+            gui = g;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -75,7 +86,7 @@ public class AddEquipment {
             size9 = new JRadioButton("9");
             size10 = new JRadioButton("10");
             add = new JButton("add");
-            add.addActionListener(new AddNewBoard());
+            add.addActionListener(new AddNewBoard(myShop, gui));
 
             leftPanel.add(typeLabel);
             leftPanel.add(type1);
@@ -110,17 +121,61 @@ public class AddEquipment {
 
         private class AddNewBoard implements ActionListener {
 
-            public AddNewBoard(Inventory shop) {
+            private Inventory myShop;
+
+            private GUI gui;
+
+            public AddNewBoard(Inventory shop, GUI g) {
+                myShop = shop;
+                gui = g;
             }
 
+
+            @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
 
             public void actionPerformed(ActionEvent event) {
+                if (type1.isSelected()) {
+                    if (size6.isSelected()) {
+                        Equipment board1 = new SoftTop(6);
+                        addEquip(board1, myShop);
+                    } else if (size7.isSelected()) {
+                        Equipment board2 = new SoftTop(7);
+                        addEquip(board2, myShop);
+                    } else if (size8.isSelected()) {
+                        Equipment board3 = new SoftTop(8);
+                        addEquip(board3, myShop);
+                    } else if (size9.isSelected()) {
+                        Equipment board4 = new SoftTop(9);
+                        addEquip(board4, myShop);
+                    } else if (size10.isSelected()) {
+                        Equipment board5 = new SoftTop(10);
+                        addEquip(board5, myShop);
+                    }
+                } else if (type2.isSelected()) {
+                    if (size6.isSelected()) {
+                        Equipment board1 = new Original(6);
+                        addEquip(board1, myShop);
+                    } else if (size7.isSelected()) {
+                        Equipment board2 = new Original(7);
+                        addEquip(board2, myShop);
+                    } else if (size8.isSelected()) {
+                        Equipment board3 = new Original(8);
+                        addEquip(board3, myShop);
+                    } else if (size9.isSelected()) {
+                        Equipment board4 = new Original(9);
+                        addEquip(board4, myShop);
+                    } else if (size10.isSelected()) {
+                        Equipment board5 = new Original(10);
+                        addEquip(board5, myShop);
+                    }
 
+                }
+                gui.updateGUI();
             }
-
         }
     }
+
 
     private class WetsuitButtonListener implements ActionListener {
 
@@ -143,8 +198,12 @@ public class AddEquipment {
 
         private ButtonGroup buttonGroup1;
         private ButtonGroup buttonGroup2;
+        private Inventory myShop;
+        private GUI gui;
 
-        public WetsuitButtonListener() {
+        public WetsuitButtonListener(Inventory shop, GUI g) {
+            myShop = shop;
+            gui = g;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -163,7 +222,7 @@ public class AddEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new AddNewWetsuit());
+            add.addActionListener(new AddNewWetsuit(myShop, gui));
 
 
             buttonGroup1 = new ButtonGroup();
@@ -199,8 +258,12 @@ public class AddEquipment {
         }
 
         private class AddNewWetsuit implements ActionListener {
+            private Inventory myShop;
+            private GUI gui;
 
-            public AddNewWetsuit() {
+            public AddNewWetsuit(Inventory shop, GUI g) {
+                myShop = shop;
+                gui = g;
             }
 
             @Override
@@ -232,7 +295,13 @@ public class AddEquipment {
         private ButtonGroup buttonGroup1;
         private ButtonGroup buttonGroup2;
 
-        public BootButtonListener() {
+        private Inventory myShop;
+
+        private GUI gui;
+
+        public BootButtonListener(Inventory shop, GUI g) {
+            myShop = shop;
+            gui = g;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -252,7 +321,7 @@ public class AddEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new AddNewBoot());
+            add.addActionListener(new AddNewBoot(myShop, gui));
 
             buttonGroup1 = new ButtonGroup();
             buttonGroup2 = new ButtonGroup();
@@ -291,7 +360,12 @@ public class AddEquipment {
 
         private class AddNewBoot implements ActionListener {
 
-            public AddNewBoot() {
+            private Inventory myShop;
+            private GUI gui;
+
+            public AddNewBoot(Inventory shop, GUI g) {
+                myShop = shop;
+                gui = g;
 
             }
 
@@ -302,5 +376,15 @@ public class AddEquipment {
 
         }
     }
+
+    public void addEquip(Equipment e, Inventory shop) {
+        shop.addEquipment(e);
+    }
+
 }
+
+
+
+
+
 

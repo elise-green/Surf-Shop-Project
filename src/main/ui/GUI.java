@@ -25,15 +25,16 @@ public class GUI extends JFrame {
     JPanel addRent = new JPanel();
     JPanel addStock = new JPanel();
 
-   private AddEquipment addEquipment = new AddEquipment();
-   private RentEquipment rentEquipment = new RentEquipment();
-    private  JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    private  JsonReader jsonReader = new JsonReader(JSON_STORE);
+
+    private RentEquipment rentEquipment;
+    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private JsonReader jsonReader = new JsonReader(JSON_STORE);
     private Inventory myShop = new Inventory();
     private static final String JSON_STORE = "./data/testWriterGeneral.json";
-    JButton saveButton = new JButton("Save");
-    JButton loadButton = new JButton("Load");
+    private JButton saveButton = new JButton("Save");
+    private JButton loadButton = new JButton("Load");
 
+    private AddEquipment addEquipment;
     JTabbedPane tabbedPane = new JTabbedPane();
     JLabel gRentLabel = new JLabel("Rented Equipment");
     JLabel gStockLabel = new JLabel("Equipment in stock");
@@ -55,12 +56,15 @@ public class GUI extends JFrame {
 
 
     public GUI() {
+
         mainPanel.add(saveButton);
         mainPanel.add(loadButton);
         gRent.add(gRentLabel);
 
         stockList = new StockList(myShop);
         rentList = new RentList(myShop);
+        addEquipment = new AddEquipment(myShop, this);
+        rentEquipment = new RentEquipment();
 
 
         saveButton.addActionListener(new SaveButtonListener());
@@ -70,12 +74,32 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Get Rented", rentList.getPanel());
         tabbedPane.addTab("Get Stock", stockList.getPanel());
         tabbedPane.add("Rent Equipment", rentEquipment.getMainPanel());
-        tabbedPane.add("Add Stock",addEquipment.getMainPanel());
+        tabbedPane.add("Add Stock", addEquipment.getMainPanel());
         add(tabbedPane);
-
-
     }
 
+    public void updateGUI() {
+        removeAll();
+        mainPanel.add(saveButton);
+        mainPanel.add(loadButton);
+        gRent.add(gRentLabel);
+
+        stockList = new StockList(myShop);
+        rentList = new RentList(myShop);
+        addEquipment = new AddEquipment(myShop, this);
+        rentEquipment = new RentEquipment();
+
+
+        saveButton.addActionListener(new SaveButtonListener());
+        loadButton.addActionListener(new LoadButtonListener());
+
+        tabbedPane.addTab("Main", mainPanel);
+        tabbedPane.addTab("Get Rented", rentList.getPanel());
+        tabbedPane.addTab("Get Stock", stockList.getPanel());
+        tabbedPane.add("Rent Equipment", rentEquipment.getMainPanel());
+        tabbedPane.add("Add Stock", addEquipment.getMainPanel());
+        add(tabbedPane);
+    }
 
     public class SaveButtonListener implements ActionListener {
 
@@ -97,7 +121,6 @@ public class GUI extends JFrame {
     }
 
 
-
     public class LoadButtonListener implements ActionListener {
 
         public LoadButtonListener() {
@@ -108,7 +131,9 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent event) {
             try {
                 myShop = jsonReader.read();
-                JOptionPane.showMessageDialog(null ,"Loaded" + "My shops inventory" + " from " + JSON_STORE);
+                JOptionPane.showMessageDialog(null, "Loaded" + "My shops inventory" + " from " + JSON_STORE);
+                updateGUI();
+
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
             }

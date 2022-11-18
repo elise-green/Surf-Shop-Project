@@ -42,8 +42,8 @@ public class JsonReader {
     private Inventory parseInventory(JSONObject jsonObject) {
 
         Inventory inventory = new Inventory();
-        addStock(inventory, jsonObject);
         addRent(inventory, jsonObject);
+        addStock(inventory, jsonObject);
         return inventory;
     }
 
@@ -64,6 +64,7 @@ public class JsonReader {
         JSONArray jsonArray = jsonObject.getJSONArray("rented");
         for (Object json : jsonArray) {
             JSONObject nextEquipment = (JSONObject) json;
+            addEquipment(inventory, nextEquipment);
             addRented(inventory, nextEquipment);
         }
     }
