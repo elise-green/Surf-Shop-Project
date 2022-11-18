@@ -1,9 +1,6 @@
 package ui;
 
-import model.Equipment;
-import model.Inventory;
-import model.Original;
-import model.SoftTop;
+import model.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -266,8 +263,63 @@ public class AddEquipment {
                 gui = g;
             }
 
+            @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
+
             public void actionPerformed(ActionEvent event) {
+                if (type1.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.XS);
+                        addEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.S);
+                        addEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.M);
+                        addEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.L);
+                        addEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.XL);
+                        addEquip(w5, myShop);
+                    }
+                } else if (type2.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.XS);
+                        addEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.S);
+                        addEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M);
+                        addEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.L);
+                        addEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.XL);
+                        addEquip(w5, myShop);
+                    }
+                } else if (type3.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.XS);
+                        addEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.S);
+                        addEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.M);
+                        addEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.L);
+                        addEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.XL);
+                        addEquip(w5, myShop);
+                    }
+                }
+                gui.updateGUI();
 
             }
         }
@@ -371,6 +423,60 @@ public class AddEquipment {
 
             @Override
             public void actionPerformed(ActionEvent event) {
+
+                if (type1.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Booties(Booties.Type.MENS, Booties.Sizes.XS);
+                        addEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Booties(Booties.Type.MENS, Booties.Sizes.S);
+                        addEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Booties(Booties.Type.MENS, Booties.Sizes.M);
+                        addEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Booties(Booties.Type.MENS, Booties.Sizes.L);
+                        addEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Booties(Booties.Type.MENS, Booties.Sizes.XL);
+                        addEquip(w5, myShop);
+                    }
+                } else if (type2.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Booties(Booties.Type.WOMENS, Booties.Sizes.XS);
+                        addEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Booties(Booties.Type.WOMENS, Booties.Sizes.S);
+                        addEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Booties(Booties.Type.WOMENS, Booties.Sizes.M);
+                        addEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Booties(Booties.Type.WOMENS, Booties.Sizes.L);
+                        addEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Booties(Booties.Type.WOMENS, Booties.Sizes.XL);
+                        addEquip(w5, myShop);
+                    }
+                } else if (type3.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Booties(Booties.Type.KIDS, Booties.Sizes.XS);
+                        addEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Booties(Booties.Type.KIDS, Booties.Sizes.S);
+                        addEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Booties(Booties.Type.KIDS, Booties.Sizes.M);
+                        addEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Booties(Booties.Type.KIDS, Booties.Sizes.L);
+                        addEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Booties(Booties.Type.KIDS,Booties.Sizes.XL);
+                        addEquip(w5, myShop);
+                    }
+                }
+                gui.updateGUI();
 
             }
 

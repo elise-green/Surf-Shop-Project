@@ -10,7 +10,7 @@ public class StockList {
 
     private JPanel panel = new JPanel();
     private JList<Equipment> list = new JList<>();
-   private  DefaultListModel modelList = new DefaultListModel<>();
+    private DefaultListModel modelList = new DefaultListModel<>();
     private JScrollPane sp;
 
     public StockList(Inventory shop) {
@@ -21,6 +21,17 @@ public class StockList {
         list.setModel(modelList);
         sp = new JScrollPane(list);
         panel.add(sp);
+    }
+
+    public JPanel updateStockList(Inventory shop) {
+        panel.removeAll();
+        for (int i = 0; i < shop.getStock().size(); i++) {
+            modelList.addElement(shop.getStock().get(i));
+        }
+        list.setModel(modelList);
+        sp = new JScrollPane(list);
+        panel.add(sp);
+        return panel;
     }
 
     public JPanel getPanel() {

@@ -1,5 +1,6 @@
 package ui;
 
+import model.*;
 import org.w3c.dom.events.MouseEvent;
 
 import javax.swing.*;
@@ -14,20 +15,28 @@ public class RentEquipment {
     private JButton surfButton;
     private JButton wetsuitButton;
     private JButton bootButton;
+    private Inventory myShop;
+    private GUI gui;
 
-    public RentEquipment() {
+    public RentEquipment(Inventory shop, GUI g) {
+        myShop = shop;
+        gui = g;
         mainPanel = new JPanel();
         surfButton = new JButton("Rent Surfboard");
         wetsuitButton = new JButton("Rent Wetsuit");
         bootButton = new JButton("Rent Booties");
 
-        surfButton.addActionListener(new SurfButtonListener());
-        wetsuitButton.addActionListener(new WetsuitButtonListener());
-        bootButton.addActionListener(new BootButtonListener());
+        surfButton.addActionListener(new SurfButtonListener(myShop, gui));
+        wetsuitButton.addActionListener(new WetsuitButtonListener(myShop, gui));
+        bootButton.addActionListener(new BootButtonListener(myShop, gui));
 
         mainPanel.add(surfButton);
         mainPanel.add(wetsuitButton);
         mainPanel.add(bootButton);
+    }
+
+    public void rentEquip(Equipment e, Inventory shop) {
+        shop.rentEquipment(e);
     }
 
     public JPanel getMainPanel() {
@@ -37,27 +46,31 @@ public class RentEquipment {
 
     private class SurfButtonListener implements ActionListener {
 
-        JSplitPane splitPane;
-        JPanel leftPanel;
-        JPanel rightPanel;
-        JLabel sizeLabel;
-        JLabel typeLabel;
-        JRadioButton type1;
-        JRadioButton type2;
-        JRadioButton size6;
-        JRadioButton size7;
-        JRadioButton size8;
-        JRadioButton size9;
-        JRadioButton size10;
+        private JSplitPane splitPane;
+        private JPanel leftPanel;
+        private JPanel rightPanel;
+        private JLabel sizeLabel;
+        private JLabel typeLabel;
+        private JRadioButton type1;
+        private JRadioButton type2;
+        private JRadioButton size6;
+        private JRadioButton size7;
+        private JRadioButton size8;
+        private JRadioButton size9;
+        private JRadioButton size10;
+        private JButton add;
+        private Inventory myShop;
+        private GUI gui;
 
-        JButton add;
 
-
-        public SurfButtonListener() {
+        public SurfButtonListener(Inventory shop, GUI g) {
+            myShop = shop;
+            gui = g;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
         private JSplitPane surfPanel() {
+
             leftPanel = new JPanel();
             rightPanel = new JPanel();
 
@@ -71,7 +84,7 @@ public class RentEquipment {
             size9 = new JRadioButton("9");
             size10 = new JRadioButton("10");
             add = new JButton("add");
-            add.addActionListener(new AddNewBoard());
+            add.addActionListener(new RentNewBoard(myShop, gui));
 
             leftPanel.add(typeLabel);
             leftPanel.add(type1);
@@ -94,18 +107,61 @@ public class RentEquipment {
             JOptionPane.showMessageDialog(null, surfPanel());
         }
 
-        private class AddNewBoard implements ActionListener {
+        private class RentNewBoard implements ActionListener {
+            private Inventory myShop;
+            private GUI gui;
 
-            public AddNewBoard() {
+            public RentNewBoard(Inventory shop, GUI g) {
+                myShop = shop;
+                gui = g;
             }
 
+            @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
 
             public void actionPerformed(ActionEvent event) {
-            }
+                if (type1.isSelected()) {
+                    if (size6.isSelected()) {
+                        Equipment board1 = new SoftTop(6);
+                        rentEquip(board1, myShop);
+                    } else if (size7.isSelected()) {
+                        Equipment board2 = new SoftTop(7);
+                        rentEquip(board2, myShop);
+                    } else if (size8.isSelected()) {
+                        Equipment board3 = new SoftTop(8);
+                        rentEquip(board3, myShop);
+                    } else if (size9.isSelected()) {
+                        Equipment board4 = new SoftTop(9);
+                        rentEquip(board4, myShop);
+                    } else if (size10.isSelected()) {
+                        Equipment board5 = new SoftTop(10);
+                        rentEquip(board5, myShop);
+                    }
+                } else if (type2.isSelected()) {
+                    if (size6.isSelected()) {
+                        Equipment board1 = new Original(6);
+                        rentEquip(board1, myShop);
+                    } else if (size7.isSelected()) {
+                        Equipment board2 = new Original(7);
+                        rentEquip(board2, myShop);
+                    } else if (size8.isSelected()) {
+                        Equipment board3 = new Original(8);
+                        rentEquip(board3, myShop);
+                    } else if (size9.isSelected()) {
+                        Equipment board4 = new Original(9);
+                        rentEquip(board4, myShop);
+                    } else if (size10.isSelected()) {
+                        Equipment board5 = new Original(10);
+                        rentEquip(board5, myShop);
+                    }
 
+                }
+                gui.updateGUI();
+            }
         }
+
     }
+
 
     private class WetsuitButtonListener implements ActionListener {
         private JSplitPane splitPane;
@@ -127,10 +183,17 @@ public class RentEquipment {
 
         private ButtonGroup buttonGroup1;
         private ButtonGroup buttonGroup2;
-        public WetsuitButtonListener() {
 
+        private Inventory myShop;
+        private GUI gui;
+
+        public WetsuitButtonListener(Inventory shop, GUI g) {
+            myShop = shop;
+            gui = g;
         }
 
+
+        @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
         private JSplitPane wetsuitPanel() {
             leftPanel = new JPanel();
             rightPanel = new JPanel();
@@ -146,7 +209,7 @@ public class RentEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new RentNewWetsuit());
+            add.addActionListener(new RentNewWetsuit(myShop, gui));
 
 
             buttonGroup1 = new ButtonGroup();
@@ -184,14 +247,76 @@ public class RentEquipment {
 
         private class RentNewWetsuit implements ActionListener {
 
-            public RentNewWetsuit(){
+            private Inventory myShop;
+            private GUI gui;
 
+            public RentNewWetsuit(Inventory shop, GUI g) {
+                myShop = shop;
+                gui = g;
             }
+
+            @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
             public void actionPerformed(ActionEvent event) {
+                if (type1.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.XS);
+                        rentEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.S);
+                        rentEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.M);
+                        rentEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.L);
+                        rentEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Wetsuit(Wetsuit.Type.MENS, Wetsuit.Sizes.XL);
+                        rentEquip(w5, myShop);
+                    }
+                } else if (type2.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.XS);
+                        rentEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.S);
+                        rentEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.M);
+                        rentEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.L);
+                        rentEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Wetsuit(Wetsuit.Type.WOMENS, Wetsuit.Sizes.XL);
+                        rentEquip(w5, myShop);
+                    }
+                } else if (type3.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.XS);
+                        rentEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.S);
+                        rentEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.M);
+                        rentEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.L);
+                        rentEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Wetsuit(Wetsuit.Type.KIDS, Wetsuit.Sizes.XL);
+                        rentEquip(w5, myShop);
+                    }
+                }
+                gui.updateGUI();
+
             }
+
         }
     }
+
 
     private class BootButtonListener implements ActionListener {
         private JSplitPane splitPane;
@@ -213,10 +338,17 @@ public class RentEquipment {
 
         private ButtonGroup buttonGroup1;
         private ButtonGroup buttonGroup2;
-        public BootButtonListener() {
 
+        private Inventory myShop;
+        private GUI gui;
+
+        public BootButtonListener(Inventory shop, GUI g) {
+            myShop = shop;
+            gui = g;
         }
 
+
+        @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
         public JSplitPane bootPanel() {
             leftPanel = new JPanel();
             rightPanel = new JPanel();
@@ -233,7 +365,7 @@ public class RentEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new RentNewBoot());
+            add.addActionListener(new RentNewBoot(myShop, gui));
 
             buttonGroup1 = new ButtonGroup();
             buttonGroup2 = new ButtonGroup();
@@ -269,11 +401,72 @@ public class RentEquipment {
         }
 
         private class RentNewBoot implements ActionListener {
+            private Inventory myShop;
+            private GUI gui;
 
-            public RentNewBoot(){}
+            public RentNewBoot(Inventory shop, GUI g) {
+                myShop = shop;
+                gui = g;
+            }
 
+
+            @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
             public void actionPerformed(ActionEvent event) {
+
+                if (type1.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Booties(Booties.Type.MENS, Booties.Sizes.XS);
+                        rentEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Booties(Booties.Type.MENS, Booties.Sizes.S);
+                        rentEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Booties(Booties.Type.MENS, Booties.Sizes.M);
+                        rentEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Booties(Booties.Type.MENS, Booties.Sizes.L);
+                        rentEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Booties(Booties.Type.MENS, Booties.Sizes.XL);
+                        rentEquip(w5, myShop);
+                    }
+                } else if (type2.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Booties(Booties.Type.WOMENS, Booties.Sizes.XS);
+                        rentEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Booties(Booties.Type.WOMENS, Booties.Sizes.S);
+                        rentEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Booties(Booties.Type.WOMENS, Booties.Sizes.M);
+                        rentEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Booties(Booties.Type.WOMENS, Booties.Sizes.L);
+                        rentEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Booties(Booties.Type.WOMENS, Booties.Sizes.XL);
+                        rentEquip(w5, myShop);
+                    }
+                } else if (type3.isSelected()) {
+                    if (size1.isSelected()) {
+                        Equipment w1 = new Booties(Booties.Type.KIDS, Booties.Sizes.XS);
+                        rentEquip(w1, myShop);
+                    } else if (size2.isSelected()) {
+                        Equipment w2 = new Booties(Booties.Type.KIDS, Booties.Sizes.S);
+                        rentEquip(w2, myShop);
+                    } else if (size3.isSelected()) {
+                        Equipment w3 = new Booties(Booties.Type.KIDS, Booties.Sizes.M);
+                        rentEquip(w3, myShop);
+                    } else if (size4.isSelected()) {
+                        Equipment w4 = new Booties(Booties.Type.KIDS, Booties.Sizes.L);
+                        rentEquip(w4, myShop);
+                    } else if (size5.isSelected()) {
+                        Equipment w5 = new Booties(Booties.Type.KIDS, Booties.Sizes.XL);
+                        rentEquip(w5, myShop);
+                    }
+                }
+                gui.updateGUI();
 
             }
         }

@@ -64,7 +64,7 @@ public class GUI extends JFrame {
         stockList = new StockList(myShop);
         rentList = new RentList(myShop);
         addEquipment = new AddEquipment(myShop, this);
-        rentEquipment = new RentEquipment();
+        rentEquipment = new RentEquipment(myShop, this);
 
 
         saveButton.addActionListener(new SaveButtonListener());
@@ -87,7 +87,7 @@ public class GUI extends JFrame {
         stockList = new StockList(myShop);
         rentList = new RentList(myShop);
         addEquipment = new AddEquipment(myShop, this);
-        rentEquipment = new RentEquipment();
+        rentEquipment = new RentEquipment(myShop, this);
 
 
         saveButton.addActionListener(new SaveButtonListener());
