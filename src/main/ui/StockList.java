@@ -24,6 +24,7 @@ public class StockList {
 
     public void updateStockList(Inventory shop) {
         panel.removeAll();
+        list.removeAll();
         for (int i = 0; i < shop.getStock().size(); i++) {
             modelList.addElement(shop.getStock().get(i));
         }

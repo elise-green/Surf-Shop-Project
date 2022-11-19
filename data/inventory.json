@@ -1,8 +1,15 @@
 {
     "rented": [],
-    "stock": [{
-        "Type": "Soft top",
-        "Category": "Surfboard",
-        "Size": "6"
-    }]
+    "stock": [
+        {
+            "Type": "MENS",
+            "Category": "Booties",
+            "Size": "XS"
+        },
+        {
+            "Type": "MENS",
+            "Category": "Wetsuit",
+            "Size": "XS"
+        }
+    ]
 }

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+//EFFECTS: sets up the main panel with the buttons
 public class RentEquipment {
     private JPanel mainPanel;
     private JButton surfButton;
@@ -17,6 +17,7 @@ public class RentEquipment {
     private RentList rentList;
     private StockList stockList;
 
+    // Constructor
     public RentEquipment(Inventory shop, GUI g, RentList r, StockList s) {
         myShop = shop;
         gui = g;
@@ -36,15 +37,19 @@ public class RentEquipment {
         mainPanel.add(bootButton);
     }
 
+    //MODIFIES: Inventory
+    //EFFECTS: Rents a piece of equipment from the stock
     public void rentEquip(Equipment e, Inventory shop) {
-        shop.rentEquipment(e);
+        myShop.rentEquipment(e);
     }
 
+
+    // getter
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
-
+    //EFFECTS: action listener
     private class SurfButtonListener implements ActionListener {
 
         private JSplitPane splitPane;
@@ -66,6 +71,7 @@ public class RentEquipment {
         private StockList stockList;
 
 
+        // constructor
         public SurfButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
@@ -74,6 +80,8 @@ public class RentEquipment {
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+
+        // Constructs a panel to choose size and type of equipment
         private JSplitPane surfPanel() {
 
             leftPanel = new JPanel();
@@ -108,6 +116,7 @@ public class RentEquipment {
 
 
         @Override
+        //EFFECTS: when the button is pressed a popup window is displayed
         public void actionPerformed(ActionEvent event) {
             JOptionPane.showMessageDialog(null, surfPanel());
         }
@@ -119,6 +128,7 @@ public class RentEquipment {
             private RentList rentList;
             private StockList stockList;
 
+            // constructor
             public RentNewBoard(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
@@ -128,6 +138,8 @@ public class RentEquipment {
 
             @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
+            // MODIFIES : Inventory, gui, stockList , rentList
+            //EFFECTS: add the piece of equipment that is selected to be rented
 
             public void actionPerformed(ActionEvent event) {
                 if (type1.isSelected()) {

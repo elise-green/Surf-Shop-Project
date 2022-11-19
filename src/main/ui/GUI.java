@@ -41,6 +41,7 @@ public class GUI extends JFrame {
 
     private JList<String> list;
 
+    // EFFECTS: runs gui
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -57,6 +58,8 @@ public class GUI extends JFrame {
 
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+
+    //EFFECTS: renders the gui and sets up all the panels
     public GUI() {
 
         try {
@@ -94,6 +97,8 @@ public class GUI extends JFrame {
 
 
 
+    // MODIFIES: \data.inventory file
+    // EFFECTS: saves the inventory to the file when the button is pressed
     public class SaveButtonListener implements ActionListener {
 
         public SaveButtonListener() {
@@ -113,7 +118,8 @@ public class GUI extends JFrame {
         }
     }
 
-
+    //MODIFIES : Inventory
+    //EFFECTS: loads the data from the file to the inventory when the button is pressed
     public class LoadButtonListener implements ActionListener {
 
 

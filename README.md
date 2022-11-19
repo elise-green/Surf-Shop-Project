@@ -89,5 +89,14 @@ The different categories of booties and for each type size, the price, and the s
 - As a user I want to be able to save the stock and rented equipment to the file.
 - As a user I want to be able to be able to reload stock amd rented and resume where I was.
 
+# Instructions for Grader
 
+- You can generate the first required event related to adding Xs to a Y by clicking the Add Equipment tab and then 
+pressing one of the three buttons and then selecting a type and size on the popup menu and then pressing the add button
+
+- You can generate the second required event related to adding Xs to a Y by clicking the Rent Equipment tab and then
+pressing one of the three buttons and then selecting a type and size on the popup menu and then pressing the add button
+- You can locate my visual component by clicking the main tab
+- You can save the state of my application by pressing the save button on the main tab
+- You can reload the state of my application by pressing the the load button on the main tab
 

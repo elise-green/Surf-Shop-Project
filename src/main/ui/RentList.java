@@ -26,6 +26,8 @@ public class RentList {
 
     public void updateRentList(Inventory shop) {
         panel.removeAll();
+        modelList.removeAllElements();
+        list.removeAll();
         for (int i = 0; i < shop.getRented().size(); i++) {
             modelList.addElement(shop.getRented().get(i));
         }
