@@ -1,12 +1,8 @@
 {
-    "rented": [{
-        "Type": "Soft top",
-        "Category": "Surfboard",
-        "Size": "8"
-    }],
+    "rented": [],
     "stock": [{
         "Type": "Soft top",
         "Category": "Surfboard",
-        "Size": "8"
+        "Size": "6"
     }]
 }

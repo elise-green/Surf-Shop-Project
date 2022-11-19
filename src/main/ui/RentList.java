@@ -4,7 +4,6 @@ import model.Equipment;
 import model.Inventory;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class RentList {
 
@@ -25,17 +24,17 @@ public class RentList {
         panel.setVisible(true);
     }
 
-    public JPanel updateRentList(Inventory shop) {
+    public void updateRentList(Inventory shop) {
         panel.removeAll();
-        for (int i = 0; i < shop.getStock().size(); i++) {
+        for (int i = 0; i < shop.getRented().size(); i++) {
             modelList.addElement(shop.getRented().get(i));
         }
         list.setModel(modelList);
         sp = new JScrollPane(list);
         panel.add(sp);
         panel.setVisible(true);
-        return panel;
     }
+
 
     public JPanel getPanel() {
         return panel;

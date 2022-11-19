@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import model.Equipment;
 import model.Inventory;
 import persistance.JsonReader;
 import persistance.JsonWriter;
@@ -16,7 +15,7 @@ public class GUI extends JFrame {
 
 
     JPanel mainPanel = new JPanel();
-    JPanel gRent = new JPanel();
+
 
     private StockList stockList;
     private RentList rentList;
@@ -25,19 +24,21 @@ public class GUI extends JFrame {
     JPanel addRent = new JPanel();
     JPanel addStock = new JPanel();
 
+    JLabel importImage;
+    ImageIcon image;
+
 
     private RentEquipment rentEquipment;
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
     private Inventory myShop = new Inventory();
-    private static final String JSON_STORE = "./data/testWriterGeneral.json";
+    private static final String JSON_STORE = "./data/inventory.json";
     private JButton saveButton = new JButton("Save");
     private JButton loadButton = new JButton("Load");
 
     private AddEquipment addEquipment;
     JTabbedPane tabbedPane = new JTabbedPane();
-    JLabel gRentLabel = new JLabel("Rented Equipment");
-    JLabel gStockLabel = new JLabel("Equipment in stock");
+
     private JList<String> list;
 
     public static void main(String[] args) {
@@ -55,16 +56,28 @@ public class GUI extends JFrame {
     }
 
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public GUI() {
 
+        try {
+            image = new ImageIcon(getClass().getResource("Surfboard.png"));
+            Image image2 = image.getImage();
+            Image image3 = image2.getScaledInstance(60, 120, Image.SCALE_SMOOTH);
+            image = new ImageIcon(image3);
+            importImage = new JLabel("Surf Shop", image, JLabel.CENTER);
+            mainPanel.add(importImage);
+        } catch (Exception e) {
+            System.out.println("Image could not be found");
+        }
+
         mainPanel.add(saveButton);
         mainPanel.add(loadButton);
-        gRent.add(gRentLabel);
+
 
         stockList = new StockList(myShop);
         rentList = new RentList(myShop);
-        addEquipment = new AddEquipment(myShop, this);
-        rentEquipment = new RentEquipment(myShop, this);
+        addEquipment = new AddEquipment(myShop, this, rentList, stockList);
+        rentEquipment = new RentEquipment(myShop, this, rentList, stockList);
 
 
         saveButton.addActionListener(new SaveButtonListener());
@@ -73,33 +86,13 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Main", mainPanel);
         tabbedPane.addTab("Get Rented", rentList.getPanel());
         tabbedPane.addTab("Get Stock", stockList.getPanel());
-        tabbedPane.add("Rent Equipment", rentEquipment.getMainPanel());
-        tabbedPane.add("Add Stock", addEquipment.getMainPanel());
+        tabbedPane.addTab("Rent Equipment", rentEquipment.getMainPanel());
+        tabbedPane.addTab("Add Stock", addEquipment.getMainPanel());
         add(tabbedPane);
     }
 
-    public void updateGUI() {
-        removeAll();
-        mainPanel.add(saveButton);
-        mainPanel.add(loadButton);
-        gRent.add(gRentLabel);
-
-        stockList = new StockList(myShop);
-        rentList = new RentList(myShop);
-        addEquipment = new AddEquipment(myShop, this);
-        rentEquipment = new RentEquipment(myShop, this);
 
 
-        saveButton.addActionListener(new SaveButtonListener());
-        loadButton.addActionListener(new LoadButtonListener());
-
-        tabbedPane.addTab("Main", mainPanel);
-        tabbedPane.addTab("Get Rented", rentList.getPanel());
-        tabbedPane.addTab("Get Stock", stockList.getPanel());
-        tabbedPane.add("Rent Equipment", rentEquipment.getMainPanel());
-        tabbedPane.add("Add Stock", addEquipment.getMainPanel());
-        add(tabbedPane);
-    }
 
     public class SaveButtonListener implements ActionListener {
 
@@ -123,26 +116,27 @@ public class GUI extends JFrame {
 
     public class LoadButtonListener implements ActionListener {
 
+
         public LoadButtonListener() {
 
         }
+
 
         @Override
         public void actionPerformed(ActionEvent event) {
             try {
                 myShop = jsonReader.read();
                 JOptionPane.showMessageDialog(null, "Loaded" + "My shops inventory" + " from " + JSON_STORE);
-                updateGUI();
-
+                stockList.updateStockList(myShop);
+                rentList.updateRentList(myShop);
+                revalidate();
+                repaint();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
             }
         }
     }
 
-    public Inventory getMyShop() {
-        return myShop;
-    }
 }
 
 

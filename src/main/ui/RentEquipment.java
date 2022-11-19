@@ -1,13 +1,10 @@
 package ui;
 
 import model.*;
-import org.w3c.dom.events.MouseEvent;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 
 
 public class RentEquipment {
@@ -17,18 +14,22 @@ public class RentEquipment {
     private JButton bootButton;
     private Inventory myShop;
     private GUI gui;
+    private RentList rentList;
+    private StockList stockList;
 
-    public RentEquipment(Inventory shop, GUI g) {
+    public RentEquipment(Inventory shop, GUI g, RentList r, StockList s) {
         myShop = shop;
         gui = g;
         mainPanel = new JPanel();
         surfButton = new JButton("Rent Surfboard");
         wetsuitButton = new JButton("Rent Wetsuit");
         bootButton = new JButton("Rent Booties");
+        rentList = r;
+        stockList = s;
 
-        surfButton.addActionListener(new SurfButtonListener(myShop, gui));
-        wetsuitButton.addActionListener(new WetsuitButtonListener(myShop, gui));
-        bootButton.addActionListener(new BootButtonListener(myShop, gui));
+        surfButton.addActionListener(new SurfButtonListener(myShop, gui, rentList, stockList));
+        wetsuitButton.addActionListener(new WetsuitButtonListener(myShop, gui, rentList, stockList));
+        bootButton.addActionListener(new BootButtonListener(myShop, gui, rentList, stockList));
 
         mainPanel.add(surfButton);
         mainPanel.add(wetsuitButton);
@@ -61,11 +62,15 @@ public class RentEquipment {
         private JButton add;
         private Inventory myShop;
         private GUI gui;
+        private RentList rentList;
+        private StockList stockList;
 
 
-        public SurfButtonListener(Inventory shop, GUI g) {
+        public SurfButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
+            rentList = r;
+            stockList = s;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -84,7 +89,7 @@ public class RentEquipment {
             size9 = new JRadioButton("9");
             size10 = new JRadioButton("10");
             add = new JButton("add");
-            add.addActionListener(new RentNewBoard(myShop, gui));
+            add.addActionListener(new RentNewBoard(myShop, gui, rentList, stockList));
 
             leftPanel.add(typeLabel);
             leftPanel.add(type1);
@@ -111,9 +116,14 @@ public class RentEquipment {
             private Inventory myShop;
             private GUI gui;
 
-            public RentNewBoard(Inventory shop, GUI g) {
+            private RentList rentList;
+            private StockList stockList;
+
+            public RentNewBoard(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
+                rentList = r;
+                stockList = s;
             }
 
             @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -156,7 +166,11 @@ public class RentEquipment {
                     }
 
                 }
-                gui.updateGUI();
+
+                rentList.updateRentList(myShop);
+                stockList.updateStockList(myShop);
+                gui.repaint();
+                gui.revalidate();
             }
         }
 
@@ -186,10 +200,14 @@ public class RentEquipment {
 
         private Inventory myShop;
         private GUI gui;
+        private RentList rentList;
+        private StockList stockList;
 
-        public WetsuitButtonListener(Inventory shop, GUI g) {
+        public WetsuitButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
+            rentList = r;
+            stockList = s;
         }
 
 
@@ -209,7 +227,7 @@ public class RentEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new RentNewWetsuit(myShop, gui));
+            add.addActionListener(new RentNewWetsuit(myShop, gui, rentList, stockList));
 
 
             buttonGroup1 = new ButtonGroup();
@@ -250,9 +268,14 @@ public class RentEquipment {
             private Inventory myShop;
             private GUI gui;
 
-            public RentNewWetsuit(Inventory shop, GUI g) {
+            private RentList rentList;
+            private StockList stockList;
+
+            public RentNewWetsuit(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
+                rentList = r;
+                stockList = s;
             }
 
             @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -310,7 +333,10 @@ public class RentEquipment {
                         rentEquip(w5, myShop);
                     }
                 }
-                gui.updateGUI();
+                rentList.updateRentList(myShop);
+                stockList.updateStockList(myShop);
+                gui.repaint();
+                gui.revalidate();
 
             }
 
@@ -341,10 +367,14 @@ public class RentEquipment {
 
         private Inventory myShop;
         private GUI gui;
+        private RentList rentList;
+        private StockList stockList;
 
-        public BootButtonListener(Inventory shop, GUI g) {
+        public BootButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
+            rentList = r;
+            stockList = s;
         }
 
 
@@ -365,7 +395,7 @@ public class RentEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new RentNewBoot(myShop, gui));
+            add.addActionListener(new RentNewBoot(myShop, gui, rentList, stockList));
 
             buttonGroup1 = new ButtonGroup();
             buttonGroup2 = new ButtonGroup();
@@ -404,9 +434,14 @@ public class RentEquipment {
             private Inventory myShop;
             private GUI gui;
 
-            public RentNewBoot(Inventory shop, GUI g) {
+            private StockList stockList;
+            private RentList rentList;
+
+            public RentNewBoot(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
+                rentList = r;
+                stockList = s;
             }
 
 
@@ -466,7 +501,10 @@ public class RentEquipment {
                         rentEquip(w5, myShop);
                     }
                 }
-                gui.updateGUI();
+                stockList.updateStockList(myShop);
+                rentList.updateRentList(myShop);
+                gui.repaint();
+                gui.revalidate();
 
             }
         }

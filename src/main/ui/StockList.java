@@ -4,7 +4,6 @@ import model.Equipment;
 import model.Inventory;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class StockList {
 
@@ -23,7 +22,7 @@ public class StockList {
         panel.add(sp);
     }
 
-    public JPanel updateStockList(Inventory shop) {
+    public void updateStockList(Inventory shop) {
         panel.removeAll();
         for (int i = 0; i < shop.getStock().size(); i++) {
             modelList.addElement(shop.getStock().get(i));
@@ -31,7 +30,6 @@ public class StockList {
         list.setModel(modelList);
         sp = new JScrollPane(list);
         panel.add(sp);
-        return panel;
     }
 
     public JPanel getPanel() {

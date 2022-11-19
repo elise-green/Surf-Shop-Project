@@ -17,17 +17,22 @@ public class AddEquipment {
 
     private GUI gui;
 
-    public AddEquipment(Inventory shop, GUI g) {
+    private RentList rentList;
+    private StockList stockList;
+
+    public AddEquipment(Inventory shop, GUI g, RentList r, StockList s) {
         mainPanel = new JPanel();
         surfButton = new JButton("Add Surfboard");
         wetsuitButton = new JButton("Add Wetsuit");
         bootButton = new JButton("Add Booties");
         myShop = shop;
         gui = g;
+        rentList = r;
+        stockList = s;
 
-        surfButton.addActionListener(new SurfButtonListener(myShop, gui));
-        wetsuitButton.addActionListener(new WetsuitButtonListener(myShop, gui));
-        bootButton.addActionListener(new BootButtonListener(myShop, gui));
+        surfButton.addActionListener(new SurfButtonListener(myShop, gui, rentList, stockList));
+        wetsuitButton.addActionListener(new WetsuitButtonListener(myShop, gui, rentList, stockList));
+        bootButton.addActionListener(new BootButtonListener(myShop, gui, rentList, stockList));
 
         mainPanel.add(surfButton);
         mainPanel.add(wetsuitButton);
@@ -63,9 +68,14 @@ public class AddEquipment {
 
         private GUI gui;
 
-        public SurfButtonListener(Inventory shop, GUI g) {
+        private RentList rentList;
+        private StockList stockList;
+
+        public SurfButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
+            stockList = s;
+            rentList = r;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -83,7 +93,7 @@ public class AddEquipment {
             size9 = new JRadioButton("9");
             size10 = new JRadioButton("10");
             add = new JButton("add");
-            add.addActionListener(new AddNewBoard(myShop, gui));
+            add.addActionListener(new AddNewBoard(myShop, gui, rentList, stockList));
 
             leftPanel.add(typeLabel);
             leftPanel.add(type1);
@@ -122,9 +132,14 @@ public class AddEquipment {
 
             private GUI gui;
 
-            public AddNewBoard(Inventory shop, GUI g) {
+            private RentList rentList;
+            private StockList stockList;
+
+            public AddNewBoard(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
+                rentList = r;
+                stockList = s;
             }
 
 
@@ -168,7 +183,9 @@ public class AddEquipment {
                     }
 
                 }
-                gui.updateGUI();
+                stockList.updateStockList(myShop);
+                gui.repaint();
+                gui.revalidate();
             }
         }
     }
@@ -197,10 +214,15 @@ public class AddEquipment {
         private ButtonGroup buttonGroup2;
         private Inventory myShop;
         private GUI gui;
+        private RentList rentList;
+        private StockList stockList;
 
-        public WetsuitButtonListener(Inventory shop, GUI g) {
+        public WetsuitButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
+            rentList = r;
+            stockList = s;
+
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -219,7 +241,7 @@ public class AddEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new AddNewWetsuit(myShop, gui));
+            add.addActionListener(new AddNewWetsuit(myShop, gui, rentList, stockList));
 
 
             buttonGroup1 = new ButtonGroup();
@@ -257,10 +279,14 @@ public class AddEquipment {
         private class AddNewWetsuit implements ActionListener {
             private Inventory myShop;
             private GUI gui;
+            private RentList rentList;
+            private StockList stockList;
 
-            public AddNewWetsuit(Inventory shop, GUI g) {
+            public AddNewWetsuit(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
+                rentList = r;
+                stockList = s;
             }
 
             @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -319,7 +345,9 @@ public class AddEquipment {
                         addEquip(w5, myShop);
                     }
                 }
-                gui.updateGUI();
+                stockList.updateStockList(myShop);
+                gui.repaint();
+                gui.revalidate();
 
             }
         }
@@ -351,9 +379,14 @@ public class AddEquipment {
 
         private GUI gui;
 
-        public BootButtonListener(Inventory shop, GUI g) {
+        private RentList rentList;
+        private StockList stockList;
+
+        public BootButtonListener(Inventory shop, GUI g, RentList r, StockList s) {
             myShop = shop;
             gui = g;
+            rentList = r;
+            stockList = s;
         }
 
         @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -373,7 +406,7 @@ public class AddEquipment {
             size4 = new JRadioButton("L");
             size5 = new JRadioButton("XL");
             add = new JButton("add");
-            add.addActionListener(new AddNewBoot(myShop, gui));
+            add.addActionListener(new AddNewBoot(myShop, gui, rentList, stockList));
 
             buttonGroup1 = new ButtonGroup();
             buttonGroup2 = new ButtonGroup();
@@ -414,13 +447,18 @@ public class AddEquipment {
 
             private Inventory myShop;
             private GUI gui;
+            private RentList rentList;
+            private StockList stockList;
 
-            public AddNewBoot(Inventory shop, GUI g) {
+            public AddNewBoot(Inventory shop, GUI g, RentList r, StockList s) {
                 myShop = shop;
                 gui = g;
+                rentList = r;
+                stockList = s;
 
             }
 
+            @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
             @Override
             public void actionPerformed(ActionEvent event) {
 
@@ -472,11 +510,13 @@ public class AddEquipment {
                         Equipment w4 = new Booties(Booties.Type.KIDS, Booties.Sizes.L);
                         addEquip(w4, myShop);
                     } else if (size5.isSelected()) {
-                        Equipment w5 = new Booties(Booties.Type.KIDS,Booties.Sizes.XL);
+                        Equipment w5 = new Booties(Booties.Type.KIDS, Booties.Sizes.XL);
                         addEquip(w5, myShop);
                     }
                 }
-                gui.updateGUI();
+                stockList.updateStockList(myShop);
+                gui.revalidate();
+                gui.repaint();
 
             }
 
