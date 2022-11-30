@@ -386,4 +386,10 @@ public class SurfShop extends Inventory {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next);
+        }
+    }
 }

@@ -23,14 +23,11 @@ public class StockList {
     }
 
     public void updateStockList(Inventory shop) {
-        panel.removeAll();
-        list.removeAll();
+        modelList.clear();
         for (int i = 0; i < shop.getStock().size(); i++) {
             modelList.addElement(shop.getStock().get(i));
         }
         list.setModel(modelList);
-        sp = new JScrollPane(list);
-        panel.add(sp);
     }
 
     public JPanel getPanel() {

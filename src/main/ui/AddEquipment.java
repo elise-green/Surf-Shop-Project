@@ -5,6 +5,7 @@ import model.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 
 //EFFECTS: sets up the main panel with the buttons
@@ -46,6 +47,8 @@ public class AddEquipment {
     public JPanel getMainPanel() {
         return mainPanel;
     }
+
+
 
 
     //Listener for the button add surfboard
@@ -128,7 +131,7 @@ public class AddEquipment {
             return splitPane;
         }
 
-    //EFFECTS: brings a pop-up menu with all the options when the button is clicked
+        //EFFECTS: brings a pop-up menu with all the options when the button is clicked
         @Override
         public void actionPerformed(ActionEvent event) {
             JOptionPane.showMessageDialog(null, surfPanel());

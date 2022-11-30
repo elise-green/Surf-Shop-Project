@@ -1,15 +1,59 @@
 {
-    "rented": [],
+    "rented": [{
+        "Type": "Soft top",
+        "Category": "Surfboard",
+        "Size": "6"
+    }],
     "stock": [
         {
-            "Type": "MENS",
-            "Category": "Booties",
-            "Size": "XS"
+            "Type": "Soft top",
+            "Category": "Surfboard",
+            "Size": "6"
         },
         {
-            "Type": "MENS",
-            "Category": "Wetsuit",
-            "Size": "XS"
+            "Type": "Soft top",
+            "Category": "Surfboard",
+            "Size": "7"
+        },
+        {
+            "Type": "Soft top",
+            "Category": "Surfboard",
+            "Size": "8"
+        },
+        {
+            "Type": "Soft top",
+            "Category": "Surfboard",
+            "Size": "9"
+        },
+        {
+            "Type": "Soft top",
+            "Category": "Surfboard",
+            "Size": "10"
+        },
+        {
+            "Type": "Original",
+            "Category": "Surfboard",
+            "Size": "6"
+        },
+        {
+            "Type": "Original",
+            "Category": "Surfboard",
+            "Size": "7"
+        },
+        {
+            "Type": "Original",
+            "Category": "Surfboard",
+            "Size": "8"
+        },
+        {
+            "Type": "Original",
+            "Category": "Surfboard",
+            "Size": "9"
+        },
+        {
+            "Type": "Original",
+            "Category": "Surfboard",
+            "Size": "10"
         }
     ]
 }

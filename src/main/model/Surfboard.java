@@ -8,7 +8,6 @@ public abstract class Surfboard extends Equipment {
     public Surfboard() {
     }
 
-
     public abstract String getCategory();
 }
 

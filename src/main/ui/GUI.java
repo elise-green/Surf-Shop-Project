@@ -7,26 +7,21 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import model.Event;
+import model.EventLog;
 import model.Inventory;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 
 public class GUI extends JFrame {
 
-
-    JPanel mainPanel = new JPanel();
-
-
+    private JPanel mainPanel = new JPanel();
     private StockList stockList;
     private RentList rentList;
 
-
-    JPanel addRent = new JPanel();
-    JPanel addStock = new JPanel();
-
-    JLabel importImage;
-    ImageIcon image;
-
+    private JLabel importImage;
+    private ImageIcon image;
+    private SurfShop surfShop;
 
     private RentEquipment rentEquipment;
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
@@ -41,6 +36,7 @@ public class GUI extends JFrame {
 
     private JList<String> list;
 
+
     // EFFECTS: runs gui
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -49,6 +45,7 @@ public class GUI extends JFrame {
                     GUI frame = new GUI();
                     frame.setVisible(true);
                     frame.setSize(425, 300);
+                    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -92,9 +89,22 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Rent Equipment", rentEquipment.getMainPanel());
         tabbedPane.addTab("Add Stock", addEquipment.getMainPanel());
         add(tabbedPane);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+
+
+                for (Event next : EventLog.getInstance()) {
+                    System.out.println(next.toString());
+                }
+                System.exit(-1);
+            }
+        });
     }
 
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 
 
     // MODIFIES: \data.inventory file
@@ -122,11 +132,9 @@ public class GUI extends JFrame {
     //EFFECTS: loads the data from the file to the inventory when the button is pressed
     public class LoadButtonListener implements ActionListener {
 
-
         public LoadButtonListener() {
 
         }
-
 
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -142,8 +150,8 @@ public class GUI extends JFrame {
             }
         }
     }
-
 }
+
 
 
 

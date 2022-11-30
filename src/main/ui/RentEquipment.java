@@ -5,6 +5,7 @@ import model.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 //EFFECTS: sets up the main panel with the buttons
 public class RentEquipment {
@@ -48,6 +49,8 @@ public class RentEquipment {
     public JPanel getMainPanel() {
         return mainPanel;
     }
+
+
 
     //EFFECTS: action listener
     private class SurfButtonListener implements ActionListener {

@@ -1,7 +1,7 @@
 package model;
 
 // The superclass which contains all equipment types and prices
-public abstract class Equipment implements persistence.Writable {
+public abstract class Equipment implements persistance.Writable {
 
 
     private static final int SURFBOARD_PRICE = 25;

@@ -5,13 +5,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Vector;
+
 
 //
 //MODIFIES : Equipment
 //EFFECTS: a class to make all the things helps to change the lists of equipment. It stores stock and rented.
 //
-public class Inventory implements persistence.Writable {
+public class Inventory  implements persistance.Writable {
     private ArrayList<Equipment> stock;
     private ArrayList<Equipment> rented;
 
@@ -20,6 +20,8 @@ public class Inventory implements persistence.Writable {
         stock = new ArrayList<>();
         rented = new ArrayList<>();
     }
+
+
 
     public ArrayList<Equipment> getStock() {
         return stock;
@@ -41,6 +43,9 @@ public class Inventory implements persistence.Writable {
     //EFFECTS: adds a piece of equipment to the stock
     public void addEquipment(Equipment thing) {
         stock.add(thing);
+        // get instance add event give description
+        Event event = new Event("New" + "" + thing.getCategory() + "" + "added");
+        EventLog.getInstance().logEvent(event);
     }
 
     //REQUIRES:
@@ -62,33 +67,13 @@ public class Inventory implements persistence.Writable {
     }
 
 
-  /*  public boolean rentEquipment(Equipment e) {
-        Boolean d = false;
-        int n = 0;
-        for (int i = 0; i < stock.size(); i++) {
-            if (e.getCategory().equals(stock.get(i).getCategory())) {
-                if (e.getType().equals(stock.get(i).getType())) {
-                    if (e.getSize().equals(stock.get(i).getSize())) {
-                        d = true;
-                        n = i;
-                        break;
-                    }
-                }
-            }
-        }
-        if (d) {
-            stock.remove(n);
-            rented.add(e);
-        }
-        return d;
-    }
-*/
-
-    public boolean rentEquipment(Equipment e)  {
+    public boolean rentEquipment(Equipment e) {
         for (int i = 0; i < stock.size(); i++) {
             if (stock.get(i).equals(e)) {
                 stock.remove(i);
                 rented.add(e);
+                Event event = new Event("New" + " " + e.getCategory() + "" + "rented");
+                EventLog.getInstance().logEvent(event);
                 return true;
             }
         }
@@ -111,12 +96,12 @@ public class Inventory implements persistence.Writable {
     //EFFECTS: Gives the price of all the items and the time that
     public int getPrice(ArrayList<Equipment> items, int time) {
         int n = 0;
-        for (int i = 0; i < items.size(); i++) {
-            if (className(items.get(i)).equals("Surfboard")) {
+        for (Equipment item : items) {
+            if (className(item).equals("Surfboard")) {
                 n += (Equipment.getSurfboardPrice() * time);
-            } else if (Objects.equals(className(items.get(i)), "Wetsuit")) {
+            } else if (Objects.equals(className(item), "Wetsuit")) {
                 n += (Equipment.getWetsuitPrice() * time);
-            } else if (Objects.equals(className(items.get(i)), "Booties")) {
+            } else if (Objects.equals(className(item), "Booties")) {
                 n += (Equipment.getBootiePrice() * time);
 
             }

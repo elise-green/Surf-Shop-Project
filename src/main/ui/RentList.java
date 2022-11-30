@@ -25,16 +25,12 @@ public class RentList {
     }
 
     public void updateRentList(Inventory shop) {
-        panel.removeAll();
-        modelList.removeAllElements();
-        list.removeAll();
+        modelList.clear();
+
         for (int i = 0; i < shop.getRented().size(); i++) {
             modelList.addElement(shop.getRented().get(i));
         }
         list.setModel(modelList);
-        sp = new JScrollPane(list);
-        panel.add(sp);
-        panel.setVisible(true);
     }
 
 
