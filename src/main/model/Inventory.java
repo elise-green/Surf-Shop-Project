@@ -44,7 +44,7 @@ public class Inventory  implements persistance.Writable {
     public void addEquipment(Equipment thing) {
         stock.add(thing);
         // get instance add event give description
-        Event event = new Event("New" + "" + thing.getCategory() + "" + "added");
+        Event event = new Event("New" + " " + thing.getCategory() + " " + "added");
         EventLog.getInstance().logEvent(event);
     }
 
@@ -72,7 +72,7 @@ public class Inventory  implements persistance.Writable {
             if (stock.get(i).equals(e)) {
                 stock.remove(i);
                 rented.add(e);
-                Event event = new Event("New" + " " + e.getCategory() + "" + "rented");
+                Event event = new Event("New" + " " + e.getCategory() + " " + "rented");
                 EventLog.getInstance().logEvent(event);
                 return true;
             }
