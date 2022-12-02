@@ -112,3 +112,9 @@ Thu Dec 01 13:07:05 PST 2022
 New Booties added
 Thu Dec 01 13:07:11 PST 2022
 New Surfboard rented
+
+# Phase 4: Task 3
+Looking at my UML and my code on change I would really like to make is an super class for AddEquipment and RentEquipment.
+As you can see in the UML the classes have the same associations and in the code they also essentially have to same 
+methods with the exception of the one class adds a piece of equipment and the other rents and the buttons have different 
+labels. 
