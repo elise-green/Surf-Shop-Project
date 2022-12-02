@@ -100,3 +100,15 @@ pressing one of the three buttons and then selecting a type and size on the popu
 - You can save the state of my application by pressing the save button on the main tab
 - You can reload the state of my application by pressing the the load button on the main tab
 
+# Phase 4 : Task 2
+This is what is printed on the consul when I run the GUI and add a surfboard, wetsuit, and booties, and then rent
+a surfboard
+
+Thu Dec 01 13:06:54 PST 2022
+New Surfboard added
+Thu Dec 01 13:06:59 PST 2022
+New Wetsuit added
+Thu Dec 01 13:07:05 PST 2022
+New Booties added
+Thu Dec 01 13:07:11 PST 2022
+New Surfboard rented
