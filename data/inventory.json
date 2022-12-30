@@ -6,54 +6,14 @@
     }],
     "stock": [
         {
-            "Type": "Soft top",
-            "Category": "Surfboard",
-            "Size": "6"
+            "Type": "KIDS",
+            "Category": "Wetsuit",
+            "Size": "S"
         },
         {
-            "Type": "Soft top",
-            "Category": "Surfboard",
-            "Size": "7"
-        },
-        {
-            "Type": "Soft top",
-            "Category": "Surfboard",
-            "Size": "8"
-        },
-        {
-            "Type": "Soft top",
-            "Category": "Surfboard",
-            "Size": "9"
-        },
-        {
-            "Type": "Soft top",
-            "Category": "Surfboard",
-            "Size": "10"
-        },
-        {
-            "Type": "Original",
-            "Category": "Surfboard",
-            "Size": "6"
-        },
-        {
-            "Type": "Original",
-            "Category": "Surfboard",
-            "Size": "7"
-        },
-        {
-            "Type": "Original",
-            "Category": "Surfboard",
-            "Size": "8"
-        },
-        {
-            "Type": "Original",
-            "Category": "Surfboard",
-            "Size": "9"
-        },
-        {
-            "Type": "Original",
-            "Category": "Surfboard",
-            "Size": "10"
+            "Type": "KIDS",
+            "Category": "Booties",
+            "Size": "S"
         }
     ]
 }
